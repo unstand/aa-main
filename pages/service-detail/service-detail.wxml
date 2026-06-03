@@ -1,0 +1,120 @@
+<!--pages/service-detail/service-detail.wxml-->
+<view class="detail-page">
+  <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
+    <!-- 产品图片区域 -->
+    <view class="product-hero" wx:if="{{service}}">
+      <view class="hero-img-wrap">
+        <view class="hero-img-placeholder">
+          <text class="hero-icon">🎒</text>
+        </view>
+        <view class="video-badge">
+          <text class="video-icon">♪</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 产品基本信息 -->
+    <view class="product-section" wx:if="{{service}}">
+      <view class="product-title-row">
+        <text class="product-name">{{service.name}}</text>
+        <text class="dropdown-icon">▼</text>
+      </view>
+      <text class="product-items">{{service.items}}</text>
+
+      <!-- 数量与价格 -->
+      <view class="quantity-price-row">
+        <view class="quantity-label">数量</view>
+        <view class="quantity-selector">
+          <view class="qty-btn {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">
+            <text>−</text>
+          </view>
+          <text class="quantity-value">{{quantity}}</text>
+          <view class="qty-btn" bindtap="onQuantityPlus">
+            <text>+</text>
+          </view>
+        </view>
+        <text class="unit-price">¥{{service.price}}/{{service.unit}}</text>
+      </view>
+
+      <!-- 时间选择 -->
+      <view class="date-section">
+        <view class="date-row">
+          <view class="date-item">
+            <text class="date-value">{{startDate}}</text>
+            <text class="date-arrow">▼</text>
+          </view>
+          <view class="date-duration">
+            <text class="duration-text">共 {{totalDays}} 日</text>
+          </view>
+          <view class="date-item date-item-right">
+            <text class="date-value">{{endDate}}</text>
+            <text class="date-arrow">▼</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 地点信息 -->
+      <view class="location-section">
+        <view class="location-row">
+          <text class="location-label">城市</text>
+          <text class="location-value">{{city}}</text>
+        </view>
+        <view class="location-row">
+          <text class="location-label">取包点</text>
+          <text class="location-value">{{pickupPoint}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 套餐选择 -->
+    <view class="package-section">
+      <scroll-view scroll-x class="package-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="package-options">
+          <view class="package-card {{selectedPackage === item.id ? 'selected' : ''}}" 
+                wx:for="{{packageOptions}}" wx:key="id" 
+                bindtap="onSelectPackage" data-id="{{item.id}}">
+            <view class="package-header">
+              <text class="package-name">{{item.name}}</text>
+              <text class="package-price-add">{{item.priceAdd > 0 ? '+¥' + item.priceAdd : '+¥0'}}</text>
+            </view>
+            <text class="package-items">{{item.items}}</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 使用须知 -->
+    <view class="notice-section">
+      <view class="notice-header">
+        <text class="notice-title">使用须知</text>
+        <view class="notice-underline"></view>
+      </view>
+      <view class="notice-content">
+        <view class="notice-img-placeholder">
+          <image class="notice-bg-img" src="/images/邀请长图（新疆自驾） 1.png" mode="aspectFill"></image>
+          <view class="notice-overlay">
+            <text class="notice-text">请在使用前仔细阅读使用说明和安全注意事项</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bar-price">
+      <text class="bar-price-label">总价：</text>
+      <text class="bar-price-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="bar-actions">
+      <view class="bar-btn bar-btn-contact" bindtap="onContactUs">
+        <text>联系我们</text>
+      </view>
+      <view class="bar-btn bar-btn-action" bindtap="onGeneratePlan">
+        <text>生成计划</text>
+      </view>
+    </view>
+  </view>
+</view>

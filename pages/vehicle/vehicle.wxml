@@ -1,0 +1,83 @@
+<view class="vehicle-page">
+  <image class="page-bg" src="/images/bj-car.png" mode="aspectFill" />
+  <view class="page-blur"></view>
+  <view class="bg-mask"></view>
+
+  <view class="search-bar">
+    <view class="search-inner">
+      <input
+        class="search-input"
+        placeholder="想要找什么车？"
+        placeholder-class="search-placeholder"
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <image class="search-icon" src="/images/sousuo.png" mode="aspectFit" />
+    </view>
+  </view>
+
+  <view class="main-content">
+    <scroll-view scroll-y class="category-sidebar" enhanced show-scrollbar="{{false}}">
+      <view class="category-item {{activeCategory === index ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="id" 
+            bindtap="onCategoryTap" data-index="{{index}}">
+        <text class="cat-name">{{item.name}}</text>
+        <text class="cat-price">¥{{item.price}}起</text>
+      </view>
+    </scroll-view>
+
+    <scroll-view scroll-y class="vehicle-list" enhanced show-scrollbar="{{false}}">
+      <view
+        class="vehicle-card"
+        wx:for="{{filteredVehicles}}"
+        wx:key="id"
+        bindtap="onVehicleTap"
+        data-id="{{item.id}}"
+      >
+        <view class="car-photo-wrap">
+          <image class="car-photo" src="{{item.image}}" mode="aspectFill" />
+        </view>
+
+        <view class="vehicle-info">
+          <view class="vehicle-title-row">
+            <view class="title-wrap">
+              <text class="vehicle-name">{{item.name}}</text>
+              <text class="vehicle-year">{{item.year}}</text>
+            </view>
+            <view class="video-badge" wx:if="{{item.hasVideo}}">
+              <text class="video-icon">♪</text>
+            </view>
+          </view>
+
+          <text class="vehicle-specs">{{item.specs}}</text>
+          <text class="vehicle-features">{{item.features}}</text>
+
+          <view class="vehicle-footer">
+            <view class="vehicle-tags">
+              <text class="vtag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+            </view>
+            <text class="vehicle-price">¥{{item.price}}/{{item.unit}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="empty-state" wx:if="{{filteredVehicles.length === 0}}">
+        <text class="empty-text">暂无该类别车辆</text>
+      </view>
+      <view class="list-bottom-space"></view>
+    </scroll-view>
+  </view>
+
+  <view class="bottom-nav">
+    <view
+      class="bottom-nav-item {{item.active ? 'active' : ''}}"
+      wx:for="{{bottomTabs}}"
+      wx:key="key"
+      bindtap="onBottomTabTap"
+      data-path="{{item.pagePath}}"
+    >
+      <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
+      <text class="bottom-nav-text">{{item.text}}</text>
+    </view>
+  </view>
+</view>

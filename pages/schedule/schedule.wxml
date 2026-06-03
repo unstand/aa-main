@@ -1,0 +1,86 @@
+<view class="schedule-page">
+  <!-- 背景图 -->
+  <image class="page-bg" src="/images/邀请长图（新疆自驾） 1.png" mode="aspectFill"></image>
+  <view class="page-mask"></view>
+
+  <!-- 顶部内容 -->
+  <view class="top-content">
+    <!-- 用户信息 -->
+    <view class="profile">
+      <text class="user-name">{{user.name}}</text>
+      <text class="user-id">ID：{{user.id}}</text>
+    </view>
+
+    <!-- 标签页 -->
+    <view class="tabs">
+      <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabTap" data-tab="0">
+        <text>我的计划</text>
+      </view>
+      <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onContactUs">
+        <text>联系我们</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 计划列表 -->
+  <scroll-view class="plan-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view
+      class="plan-card"
+      wx:for="{{plans}}"
+      wx:key="id"
+    >
+      <!-- 左侧封面 -->
+      <view class="cover-wrap">
+        <image class="cover-image" src="{{item.cover}}" mode="aspectFill"></image>
+        <view class="cover-mask"></view>
+        <!-- 锁图标 -->
+        <view class="lock-icon">
+          <view class="lock-ring"></view>
+          <view class="lock-body"></view>
+        </view>
+        <!-- 金额标签 -->
+        <view class="price-pill">
+          <text>{{item.priceLabel}}</text>
+        </view>
+        <!-- 封面底部标题 -->
+        <view class="cover-bottom">
+          <text class="cover-title">{{item.title}}</text>
+          <view class="cover-tags">
+            <text class="cover-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 右侧详情 -->
+      <view class="card-content">
+        <view class="detail-list">
+          <text class="detail-line">创建时间：{{item.createDate}}</text>
+          <text class="detail-line">计划日期：{{item.startDate}}至{{item.endDate}}</text>
+          <text class="detail-line">出发地点：{{item.departure}}</text>
+          <text class="detail-line">车辆：{{item.vehicle}}</text>
+        </view>
+        <view class="action-row">
+          <view class="action-btn ghost" catchtap="{{item.status === 0 ? 'onModifyPlan' : 'onViewPlan'}}" data-id="{{item.id}}">
+            <text>{{item.status === 0 ? '修改计划' : '查看计划'}}</text>
+          </view>
+          <view class="action-btn {{item.status === 0 ? 'primary' : 'ghost'}}" catchtap="{{item.status === 0 ? 'onBookNow' : 'onViewContract'}}" data-id="{{item.id}}">
+            <text>{{item.status === 0 ? '立即预定' : '查看合同'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="empty-space"></view>
+  </scroll-view>
+  <view class="bottom-nav">
+    <view
+      class="bottom-nav-item {{item.active ? 'active' : ''}}"
+      wx:for="{{bottomTabs}}"
+      wx:key="key"
+      bindtap="onBottomTabTap"
+      data-path="{{item.pagePath}}"
+    >
+      <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
+      <text class="bottom-nav-text">{{item.text}}</text>
+    </view>
+  </view>
+</view>

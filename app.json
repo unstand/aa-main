@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/vehicle/vehicle",
+    "pages/service/service",
+    "pages/schedule/schedule",
+    "pages/vehicle-detail/vehicle-detail",
+    "pages/service-detail/service-detail",
+    "pages/plan-detail/plan-detail",
+    "pages/contract/contract"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "探索旅行",
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "backgroundColor": "#1a1a2e"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

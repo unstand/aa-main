@@ -1,0 +1,250 @@
+<!--pages/plan-detail/plan-detail.wxml-->
+<view class="plan-detail-page">
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view class="error-wrap" wx:elif="{{error}}">
+    <text class="error-text">{{error}}</text>
+    <view class="retry-btn" bindtap="loadPlanDetail">
+      <text>重新加载</text>
+    </view>
+  </view>
+
+  <block wx:else>
+    <scroll-view scroll-y class="content-scroll" scroll-into-view="{{scrollIntoView}}">
+      <!-- 1. 顶部滑动图片 -->
+      <view class="hero-swiper-section">
+        <swiper
+          class="hero-swiper"
+          circular
+          previous-margin="48rpx"
+          next-margin="48rpx"
+          current="{{swiperCurrent}}"
+          bindchange="onHeroSwiperChange"
+        >
+          <swiper-item wx:for="{{detail.images}}" wx:key="url">
+            <view class="hero-swiper-item">
+              <image class="hero-image" src="{{item.url}}" mode="aspectFill"></image>
+            </view>
+          </swiper-item>
+        </swiper>
+        <view class="hero-dots">
+          <view
+            class="hero-dot {{swiperCurrent === index ? 'hero-dot-active' : ''}}"
+            wx:for="{{detail.images}}"
+            wx:key="url"
+          ></view>
+        </view>
+      </view>
+
+      <!-- 2. 标题与描述 -->
+      <view class="intro-section">
+        <text class="intro-title">{{detail.title}}</text>
+        <text class="intro-line" wx:for="{{detail.description}}" wx:key="*this">{{item}}</text>
+      </view>
+
+      <!-- 3. 预订信息卡片 -->
+      <view class="booking-card">
+        <view class="booking-top">
+          <view class="guest-control">
+            <text class="booking-label">人数</text>
+            <view class="stepper">
+              <view class="stepper-btn" bindtap="onGuestMinus">-</view>
+              <text class="stepper-value">{{guestCount}}</text>
+              <view class="stepper-btn" bindtap="onGuestPlus">+</view>
+            </view>
+          </view>
+          <text class="booking-price">¥{{detail.booking.price}}/{{detail.booking.unit}}</text>
+        </view>
+        <view class="booking-dates">
+          <text class="date-text">{{detail.booking.startDate}}</text>
+          <view class="date-center">
+            <text class="date-days">共{{detail.booking.totalDays}}日</text>
+          </view>
+          <text class="date-text">{{detail.booking.endDate}}</text>
+        </view>
+        <view class="booking-location">
+          <view class="location-col">
+            <text class="location-label">城市</text>
+            <text class="location-value">{{detail.booking.city}}</text>
+          </view>
+          <view class="location-col">
+            <text class="location-label">出发点</text>
+            <text class="location-value">{{detail.booking.departurePoint}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 4. 地图预览 -->
+      <view class="map-section">
+        <image class="map-image" src="{{detail.map.image}}" mode="aspectFill"></image>
+        <view class="map-pin">
+          <text class="map-pin-icon">📍</text>
+        </view>
+      </view>
+
+      <!-- 5. 推荐车辆 -->
+      <view class="resource-card" wx:if="{{detail.vehicle}}">
+        <view class="resource-header">
+          <view class="resource-info">
+            <text class="resource-name">{{detail.vehicle.name}}</text>
+            <text class="resource-specs">{{detail.vehicle.specs}}</text>
+            <text class="resource-features">{{detail.vehicle.features}}</text>
+          </view>
+        </view>
+        <view class="resource-action-row">
+          <text class="resource-price">¥{{detail.vehicle.price}}/{{detail.vehicle.unit}}</text>
+          <view class="stepper stepper-sm">
+            <view class="stepper-btn" bindtap="onVehicleMinus">-</view>
+            <text class="stepper-value">{{vehicleCount}}</text>
+            <view class="stepper-btn" bindtap="onVehiclePlus">+</view>
+          </view>
+          <view class="outline-btn" bindtap="onModifyVehicle">
+            <text>修改车辆</text>
+          </view>
+        </view>
+        <swiper
+          class="resource-swiper"
+          indicator-dots="{{detail.vehicle.images.length > 1}}"
+          indicator-color="rgba(255,255,255,0.3)"
+          indicator-active-color="#ffffff"
+          circular
+        >
+          <swiper-item wx:for="{{detail.vehicle.images}}" wx:key="*this">
+            <view class="resource-image-wrap">
+              <image class="resource-image" src="{{item}}" mode="aspectFit"></image>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+
+      <!-- 6. 附加服务 -->
+      <view class="resource-card" wx:if="{{detail.service}}">
+        <view class="resource-header">
+          <view class="resource-info">
+            <text class="resource-name">{{detail.service.name}}</text>
+            <text class="resource-specs">{{detail.service.specs}}</text>
+          </view>
+        </view>
+        <view class="resource-action-row">
+          <text class="resource-price">¥{{detail.service.price}}/{{detail.service.unit}}</text>
+          <view class="stepper stepper-sm">
+            <view class="stepper-btn" bindtap="onServiceMinus">-</view>
+            <text class="stepper-value">{{serviceCount}}</text>
+            <view class="stepper-btn" bindtap="onServicePlus">+</view>
+          </view>
+          <view class="outline-btn" bindtap="onModifyService">
+            <text>修改服务</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="add-service-btn" bindtap="onAddService">
+        <text>+ 添加更多服务</text>
+      </view>
+
+      <!-- 7. Tab 内容区 -->
+      <view class="tab-section" id="tab-section">
+        <view class="tab-bar">
+          <view
+            class="tab-item {{activeTab === 'activity' ? 'tab-active' : ''}}"
+            bindtap="onTabChange"
+            data-tab="activity"
+          >
+            <text>活动</text>
+            <view class="tab-line" wx:if="{{activeTab === 'activity'}}"></view>
+          </view>
+          <view
+            class="tab-item {{activeTab === 'schedule' ? 'tab-active' : ''}}"
+            bindtap="onTabChange"
+            data-tab="schedule"
+          >
+            <text>详细日程</text>
+            <view class="tab-line" wx:if="{{activeTab === 'schedule'}}"></view>
+          </view>
+          <view
+            class="tab-item {{activeTab === 'fee' ? 'tab-active' : ''}}"
+            bindtap="onTabChange"
+            data-tab="fee"
+          >
+            <text>费用须知</text>
+            <view class="tab-line" wx:if="{{activeTab === 'fee'}}"></view>
+          </view>
+        </view>
+
+        <!-- 活动 Tab -->
+        <view class="tab-panel" wx:if="{{activeTab === 'activity'}}">
+          <view class="activity-hero">
+            <image class="activity-image" src="{{detail.activity.image}}" mode="aspectFill"></image>
+            <view class="activity-features">
+              <view class="feature-item" wx:for="{{detail.activity.features}}" wx:key="label">
+                <view class="feature-icon-wrap">
+                  <image wx:if="{{item.icon}}" class="feature-icon" src="{{item.icon}}" mode="aspectFit"></image>
+                  <text wx:else class="feature-icon-text">{{item.label[0]}}</text>
+                </view>
+                <text class="feature-label">{{item.label}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 详细日程 Tab -->
+        <view class="tab-panel" wx:if="{{activeTab === 'schedule'}}">
+          <view class="schedule-card">
+            <view class="schedule-day" wx:for="{{detail.schedule}}" wx:key="day">
+              <view class="schedule-day-header">
+                <text class="schedule-day-num">DAY{{item.day}}</text>
+                <text class="schedule-day-title">{{item.title}}</text>
+              </view>
+              <view class="schedule-period" wx:for="{{item.periods}}" wx:for-item="period" wx:key="time">
+                <view class="period-left">
+                  <view class="period-icon period-icon-{{period.type}}"></view>
+                  <text class="period-time">{{period.time}}</text>
+                </view>
+                <view class="period-content">
+                  <text class="period-item" wx:for="{{period.items}}" wx:for-item="line" wx:key="*this">{{line}}</text>
+                </view>
+              </view>
+              <view class="schedule-transport" wx:if="{{item.transport}}">
+                <text class="transport-icon">🛣</text>
+                <text class="transport-text">交通 {{item.transport.duration}} {{item.transport.distance}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 费用须知 Tab -->
+        <view class="tab-panel" wx:if="{{activeTab === 'fee'}}">
+          <view class="fee-card">
+            <view class="fee-section" wx:for="{{detail.feeSections}}" wx:key="title">
+              <view class="fee-section-header">
+                <text class="fee-section-title">{{item.title}}</text>
+                <view class="fee-section-dot"></view>
+              </view>
+              <text class="fee-section-item" wx:for="{{item.items}}" wx:for-item="line" wx:key="*this">{{line}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="safe-bottom"></view>
+    </scroll-view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <view class="price-info">
+        <text class="price-label">总价：</text>
+        <text class="price-value">¥{{totalPrice}}</text>
+      </view>
+      <view class="action-btns">
+        <view class="btn btn-contact" bindtap="onContactUs">
+          <text>联系我们</text>
+        </view>
+        <view class="btn btn-action" bindtap="onGeneratePlan">
+          <text class="btn-action-text">生成计划</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

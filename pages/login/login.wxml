@@ -1,0 +1,60 @@
+<view class="login-page">
+
+<view class="back-btn" bindtap="onBack">
+
+<!-- 矢量箭头 -->
+<view class="back-arrow"></view>
+
+</view>
+<!-- 背景图 -->
+<image
+  class="bg-image"
+  src="/images/login-bj.png"
+  mode="aspectFill"
+></image>
+
+<!-- 蒙层 -->
+<view class="mask"></view>
+
+<!-- 中间内容 -->
+<view class="content">
+
+  <!-- Logo -->
+  <image
+    class="moon-logo"
+    src="/images/moon.png"
+    mode="aspectFit"
+  ></image>
+
+  <!-- 文案 -->
+  <view class="slogan">
+    这个世界值得用一生去探索
+  </view>
+
+  <!-- 微信登录 -->
+  <button
+    class="wechat-btn"
+    bindtap="onWechatLogin"
+  >
+    微信授权登录
+  </button>
+
+</view>
+
+<!-- 底部协议 -->
+<view class="agreement-box">
+
+  <checkbox 
+    value="agree"
+    checked="{{agreed}}"
+    bindtap="onAgreeChange"
+    color="#7EDAD6"
+  />
+
+  <text class="agreement-text">
+    登录即同意《服务协议》和《隐私政策》
+    
+  </text>
+</view>
+
+</view>

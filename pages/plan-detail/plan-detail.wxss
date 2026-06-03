@@ -1,0 +1,596 @@
+/* pages/plan-detail/plan-detail.wxss */
+.plan-detail-page {
+  min-height: 100vh;
+  background-color: #2a3344;
+}
+
+.content-scroll {
+  height: calc(100vh - 120rpx);
+}
+
+.loading-wrap,
+.error-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+}
+
+.loading-text,
+.error-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.retry-btn {
+  padding: 16rpx 40rpx;
+  border-radius: 999rpx;
+  background: #4ecdc4;
+  color: #ffffff;
+  font-size: 26rpx;
+}
+
+/* 1. 顶部滑动图片 */
+.hero-swiper-section {
+  padding: 24rpx 0 16rpx;
+}
+
+.hero-swiper {
+  height: 420rpx;
+}
+
+.hero-swiper-item {
+  padding: 0 12rpx;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 28rpx;
+}
+
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.hero-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.hero-dot-active {
+  background: #4ecdc4;
+}
+
+/* 2. 标题描述 */
+.intro-section {
+  padding: 8rpx 32rpx 24rpx;
+}
+
+.intro-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16rpx;
+}
+
+.intro-line {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+  margin-bottom: 8rpx;
+}
+
+/* 3. 预订卡片 */
+.booking-card {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+}
+
+.booking-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.guest-control {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.booking-label {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.booking-price {
+  font-size: 30rpx;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+  border-radius: 999rpx;
+  overflow: hidden;
+}
+
+.stepper-sm {
+  transform: scale(0.92);
+}
+
+.stepper-btn {
+  width: 56rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.stepper-value {
+  min-width: 48rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #ffffff;
+}
+
+.booking-dates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.date-text {
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.date-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.date-days {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 4rpx 20rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+  border-radius: 999rpx;
+}
+
+.booking-location {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 20rpx;
+}
+
+.location-col {
+  flex: 1;
+}
+
+.location-label {
+  display: block;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8rpx;
+}
+
+.location-value {
+  display: block;
+  font-size: 26rpx;
+  color: #ffffff;
+}
+
+/* 4. 地图 */
+.map-section {
+  position: relative;
+  margin: 0 32rpx 24rpx;
+  height: 220rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+}
+
+.map-pin {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: rgba(78, 205, 196, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-pin-icon {
+  font-size: 24rpx;
+}
+
+/* 5/6. 车辆与服务卡片 */
+.resource-card {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.resource-name {
+  display: block;
+  font-size: 30rpx;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.resource-specs,
+.resource-features {
+  display: block;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin-bottom: 4rpx;
+}
+
+.resource-action-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin: 20rpx 0;
+}
+
+.resource-price {
+  flex: 1;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.outline-btn {
+  padding: 10rpx 24rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+}
+
+.outline-btn text {
+  font-size: 22rpx;
+  color: #ffffff;
+}
+
+.resource-swiper {
+  height: 280rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.resource-image-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-image {
+  width: 90%;
+  height: 220rpx;
+}
+
+.add-service-btn {
+  margin: 0 32rpx 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  border: 1rpx dashed rgba(255, 255, 255, 0.25);
+  text-align: center;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 7. Tab 区域 */
+.tab-section {
+  margin: 0 32rpx 24rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background: rgba(20, 26, 36, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.tab-bar {
+  display: flex;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.08);
+}
+
+.tab-item {
+  flex: 1;
+  position: relative;
+  padding: 24rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.tab-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background: #4ecdc4;
+}
+
+.tab-panel {
+  padding: 24rpx;
+}
+
+/* 活动 Tab */
+.activity-hero {
+  position: relative;
+  height: 360rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.activity-image {
+  width: 100%;
+  height: 100%;
+}
+
+.activity-features {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24rpx;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 12rpx;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.feature-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.feature-icon-text {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+
+.feature-label {
+  font-size: 18rpx;
+  color: #ffffff;
+}
+
+/* 详细日程 Tab */
+.schedule-day {
+  margin-bottom: 32rpx;
+}
+
+.schedule-day-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.schedule-day-num {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.schedule-day-title {
+  font-size: 30rpx;
+  color: #ffffff;
+}
+
+.schedule-period {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.period-left {
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.period-icon {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}
+
+.period-icon-ring {
+  border: 3rpx solid #ffd93d;
+  background: transparent;
+}
+
+.period-icon-dot {
+  background: #ffd93d;
+}
+
+.period-time {
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.period-content {
+  flex: 1;
+}
+
+.period-item {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  margin-bottom: 4rpx;
+}
+
+.schedule-transport {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding-left: 100rpx;
+}
+
+.transport-text {
+  font-size: 24rpx;
+  color: #ffd93d;
+}
+
+/* 费用须知 Tab */
+.fee-section {
+  margin-bottom: 28rpx;
+}
+
+.fee-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.fee-section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.fee-section-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: #ffd93d;
+}
+
+.fee-section-item {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+  margin-bottom: 8rpx;
+}
+
+.safe-bottom {
+  height: 140rpx;
+}
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 32rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(30, 30, 50, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1rpx solid rgba(255, 255, 255, 0.08);
+  z-index: 100;
+}
+
+.price-info {
+  flex: 1;
+}
+
+.price-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.price-value {
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.action-btns {
+  display: flex;
+  gap: 16rpx;
+}
+
+.btn {
+  padding: 16rpx 28rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn-contact {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-action {
+  background: #4ecdc4;
+}
+
+.btn-action-text {
+  color: #1a1a2e;
+}
