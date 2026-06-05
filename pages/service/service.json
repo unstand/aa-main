@@ -2,5 +2,8 @@
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#1a1a2e",
-  "navigationBarTitleText": "附加服务"
+  "navigationBarTitleText": "附加服务",
+  "usingComponents": {
+    "app-tabbar": "/components/app-tabbar/app-tabbar"
+  }
 }

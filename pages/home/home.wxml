@@ -1,70 +1,77 @@
+<view class="home-page">
+  <image class="page-bg" src="/images/home-bj.png" mode="aspectFill"></image>
+  <view class="page-overlay"></view>
 
-<view style="  background-image: url('/images/home-bj.png');" class="home-page">
-  <!-- 搜索栏 -->
-  <view class="search-bar">
-    <image class="moon-logo" src="/images/logo.png" mode="aspectFit"/>
-    <view class="search-inner">
-      <input 
-        class="search-input" 
-        placeholder="你有什么计划？" 
-        placeholder-class="search-placeholder" 
-        bindinput="onSearchInput" 
-        value="{{searchKeyword}}" 
+  <view class="top-shell" style="{{topShellStyle}}">
+    <view class="brand-btn">
+      <image class="brand-icon" src="/images/logo.png" mode="aspectFit"></image>
+    </view>
+    <view class="search-box">
+      <input
+        class="search-input"
+        placeholder="你有什么计划？"
+        placeholder-class="search-placeholder"
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
       />
-      <image class="search-icon" src="/images/sousuo.png" mode="aspectFit" />
+      <image class="search-icon" src="/images/sousuo.png" mode="aspectFit"></image>
+    </view>
+    <view class="capsule-btn" style="{{capsuleStyle}}" bindtap="onMoreMenu">
+      <view class="capsule-dots">
+        <view class="capsule-dot"></view>
+        <view class="capsule-dot"></view>
+        <view class="capsule-dot"></view>
+      </view>
+      <view class="capsule-split"></view>
+      <view class="capsule-ring"></view>
     </view>
   </view>
 
-  <scroll-view scroll-y class="content-scroll">
-    <!-- 当季热门计划 -->
+  <scroll-view scroll-y class="content-scroll" show-scrollbar="{{false}}">
     <view class="section">
-      <view class="section-header">
-        <text class="section-title">当季热门计划：</text>
-      </view>
-      <scroll-view scroll-x class="plan-scroll" enhanced show-scrollbar="{{false}}">
-        <view class="plan-cards">
+      <text class="section-title">当季热门计划：</text>
+      <scroll-view scroll-x class="horizontal-scroll" show-scrollbar="{{false}}">
+        <view class="hero-row">
           <view
-            class="glass-plan-card"
+            class="hero-card"
             wx:for="{{plans}}"
             wx:key="id"
             bindtap="onPlanTap"
             data-id="{{item.id}}"
           >
-            <view class="plan-card-inner">
-              <view class="plan-left">
-                <view class="plan-image-wrap">
-                  <image class="plan-image" src="{{item.image}}" mode="aspectFill"></image>
-                  <view class="plan-price-tag">
-                    <text class="price-text">¥{{item.price}}/{{item.unit}}</text>
-                  </view>
-                </view>
-                <text class="plan-card-title">{{item.displayTitle}}</text>
-                <view class="plan-meta-row">
-                  <text class="meta-tag">{{item.days}}天{{item.nights}}晚</text>
-                  <text class="meta-tag">{{item.distance}}</text>
-                </view>
-                <view class="carousel-dots">
-                  <view
-                    class="dot {{dotIndex === 0 ? 'dot-active' : ''}}"
-                    wx:for="{{carouselDots}}"
-                    wx:for-item="dot"
-                    wx:for-index="dotIndex"
-                    wx:key="dotIndex"
-                  ></view>
-                </view>
+            <view class="hero-left">
+              <view class="hero-image-shell">
+                <image class="hero-image" src="{{item.image}}" mode="aspectFill"></image>
+                <view class="hero-price">¥{{item.price}}/{{item.unit}}</view>
               </view>
-              <view class="plan-right">
-                <view class="plan-tags-grid">
-                  <text
-                    class="feature-tag feature-tag-{{tagIndex % 3}}"
-                    wx:for="{{item.tags}}"
-                    wx:for-item="tag"
-                    wx:for-index="tagIndex"
-                    wx:key="tagIndex"
-                  >{{tag}}</text>
+              <view class="hero-dots">
+                <view class="hero-dot hero-dot-active"></view>
+                <view class="hero-dot"></view>
+                <view class="hero-dot"></view>
+              </view>
+              <text class="hero-title">{{item.displayTitle}}</text>
+              <view class="hero-meta">
+                <text class="hero-meta-pill">{{item.days}}天{{item.nights}}晚</text>
+                <text class="hero-meta-pill">{{item.distance}}</text>
+              </view>
+            </view>
+            <view class="hero-right">
+              <view class="hero-tag-grid">
+                <text
+                  class="hero-tag {{tagIndex < 2 ? 'hero-tag-pink' : 'hero-tag-gray'}}"
+                  wx:for="{{item.tags}}"
+                  wx:for-item="tag"
+                  wx:for-index="tagIndex"
+                  wx:key="tagIndex"
+                >{{tag}}</text>
+              </view>
+              <text class="hero-desc">{{item.description}}</text>
+              <view class="hero-footer">
+                <view class="hero-badge">
+                  <image class="hero-badge-icon" src="/images/logo.png" mode="aspectFit"></image>
+                  <text class="hero-badge-text">匿召</text>
                 </view>
-                <text class="plan-desc-text">{{item.description}}</text>
-                <text class="plan-season">{{item.seasonLabel}}</text>
+                <text class="hero-score">{{item.rating}}</text>
               </view>
             </view>
           </view>
@@ -72,112 +79,84 @@
       </scroll-view>
     </view>
 
-    <!-- DIY定制计划 -->
     <view class="section">
-      <view class="section-header">
-        <text class="section-title">DIY定制计划：</text>
-      </view>
+      <text class="section-title">DIY定制计划：</text>
       <view class="diy-card" bindtap="onGoDIY">
-        <image class="diy-bg-image" src="/images/diy-bg.png" mode="aspectFill"></image>
-        <view class="diy-gradient"></view>
-        <view class="diy-row">
-          <text class="diy-desc">在游玩中根据自己的喜好定制目的地，车辆及领队及额外服务</text>
-          <view class="diy-btn">
-            <text class="diy-btn-text">前往定制</text>
+        <image class="diy-image" src="/images/login-bj.png" mode="aspectFill"></image>
+        <view class="diy-mask"></view>
+        <view class="diy-content">
+          <view>
+            <text class="diy-title">DIY定制计划：</text>
+            <text class="diy-text">在游玩中根据自己的喜好定制目的地，车辆及领队及额外服务，</text>
           </view>
+          <view class="diy-btn">前往定制</view>
         </view>
       </view>
     </view>
 
-    <!-- 中亚游 -->
     <view class="section">
-      <view class="section-header">
-        <text class="section-title">中亚游：</text>
-      </view>
+      <text class="section-title">中亚游：</text>
       <view
-        class="glass-plan-card central-asia-card"
+        class="hero-card hero-card-single"
         wx:for="{{centralAsiaPlans}}"
         wx:key="id"
+        bindtap="onCentralAsiaTap"
+        data-id="{{item.id}}"
       >
-        <view class="plan-card-inner">
-          <view class="plan-left" bindtap="onCentralAsiaTap" data-id="{{item.id}}">
-            <view class="plan-image-wrap plan-image-wrap-vertical">
-              <image class="plan-image" src="{{item.image}}" mode="aspectFill"></image>
-              <view class="plan-price-tag">
-                <text class="price-text">¥{{item.price}}/{{item.unit}}</text>
-              </view>
-            </view>
-            <text class="plan-card-title">{{item.displayTitle}}</text>
-            <view class="plan-meta-row">
-              <text class="meta-tag">{{item.days}}天{{item.nights}}晚</text>
-              <text class="meta-tag">{{item.distance}}</text>
-            </view>
-            <view class="carousel-dots">
-              <view
-                class="dot {{dotIndex === 0 ? 'dot-active' : ''}}"
-                wx:for="{{carouselDots}}"
-                wx:for-item="dot"
-                wx:for-index="dotIndex"
-                wx:key="dotIndex"
-              ></view>
-            </view>
+        <view class="hero-left hero-left-rect">
+          <view class="hero-image-shell hero-image-shell-rect">
+            <image class="hero-image" src="{{item.image}}" mode="aspectFill"></image>
+            <view class="hero-price">¥{{item.price}}/{{item.unit}}</view>
           </view>
-          <view class="plan-right" bindtap="onCentralAsiaTap" data-id="{{item.id}}">
-            <view class="plan-tags-grid">
-              <text
-                class="feature-tag feature-tag-{{tagIndex % 3}}"
-                wx:for="{{item.tags}}"
-                wx:for-item="tag"
-                wx:for-index="tagIndex"
-                wx:key="tagIndex"
-              >{{tag}}</text>
-            </view>
-            <text class="plan-desc-text">{{item.description}}</text>
-            <text class="plan-season">{{item.seasonLabel}}</text>
+          <view class="hero-dots">
+            <view class="hero-dot hero-dot-active"></view>
+            <view class="hero-dot"></view>
+            <view class="hero-dot"></view>
+          </view>
+          <text class="hero-title">{{item.displayTitle}}</text>
+          <view class="hero-meta">
+            <text class="hero-meta-pill">{{item.days}}天{{item.nights}}晚</text>
+            <text class="hero-meta-pill">{{item.distance}}</text>
           </view>
         </view>
+        <view class="hero-right">
+          <view class="hero-tag-grid">
+            <text
+              class="hero-tag {{tagIndex < 2 ? 'hero-tag-pink' : 'hero-tag-gray'}}"
+              wx:for="{{item.tags}}"
+              wx:for-item="tag"
+              wx:for-index="tagIndex"
+              wx:key="tagIndex"
+            >{{tag}}</text>
+          </view>
+          <text class="hero-desc">{{item.description}}</text>
+          <text class="hero-subtitle">{{item.subtitle}}</text>
+        </view>
 
-        <view class="login-float-bar" wx:if="{{showLoginBar && !isLoggedIn}}">
-          <text class="login-float-text">登录开启私域定制的旅行计划</text>
-          <view class="login-float-btn" bindtap="onGoLogin">
-            <text class="login-float-btn-text">立即登录</text>
+        <view class="login-bar" wx:if="{{showLoginBar && !isLoggedIn}}">
+          <view class="login-copy">
+            <image class="login-copy-icon" src="/images/logo.png" mode="aspectFit"></image>
+            <text class="login-copy-text">登录开启私域定制的旅行计划</text>
           </view>
-          <view class="login-float-close" catchtap="onCloseLoginBar">
-            <text class="login-float-close-text">✕</text>
-          </view>
+          <view class="login-btn" bindtap="onGoLogin">立即登录</view>
+          <view class="login-close" catchtap="onCloseLoginBar">×</view>
         </view>
       </view>
     </view>
 
-    <!-- 底部留白 -->
     <view class="scroll-bottom-space"></view>
   </scroll-view>
 
-  <!-- 登录弹窗 -->
+  <app-tabbar activeKey="home"></app-tabbar>
+
   <view class="modal-mask" wx:if="{{showLoginModal}}" bindtap="onCloseLoginModal">
-    <view class="modal-content" catchtap="">
+    <view class="modal-content" catchtap="noop">
       <text class="modal-title">需要登录</text>
       <text class="modal-desc">请先登录后查看详细计划</text>
-      <view class="modal-btns">
-        <view class="btn-secondary modal-cancel" bindtap="onCloseLoginModal">
-          <text>取消</text>
-        </view>
-        <view class="btn-primary modal-confirm" bindtap="onGoLogin">
-          <text>去登录</text>
-        </view>
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-ghost" bindtap="onCloseLoginModal">取消</view>
+        <view class="modal-btn modal-btn-primary" bindtap="onGoLogin">去登录</view>
       </view>
-    </view>
-  </view>
-  <view class="bottom-nav">
-    <view
-      class="bottom-nav-item {{item.active ? 'active' : ''}}"
-      wx:for="{{bottomTabs}}"
-      wx:key="key"
-      bindtap="onBottomTabTap"
-      data-path="{{item.pagePath}}"
-    >
-      <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
-      <text class="bottom-nav-text">{{item.text}}</text>
     </view>
   </view>
 </view>

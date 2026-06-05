@@ -2,5 +2,8 @@
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#10101a",
-  "navigationBarTitleText": "计划"
+  "navigationBarTitleText": "计划",
+  "usingComponents": {
+    "app-tabbar": "/components/app-tabbar/app-tabbar"
+  }
 }

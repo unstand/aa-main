@@ -71,16 +71,5 @@
     </view>
     <view class="empty-space"></view>
   </scroll-view>
-  <view class="bottom-nav">
-    <view
-      class="bottom-nav-item {{item.active ? 'active' : ''}}"
-      wx:for="{{bottomTabs}}"
-      wx:key="key"
-      bindtap="onBottomTabTap"
-      data-path="{{item.pagePath}}"
-    >
-      <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
-      <text class="bottom-nav-text">{{item.text}}</text>
-    </view>
-  </view>
+  <app-tabbar activeKey="schedule"></app-tabbar>
 </view>

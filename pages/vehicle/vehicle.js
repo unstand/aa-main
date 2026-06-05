@@ -1,4 +1,3 @@
-// pages/vehicle/vehicle.js
 const categories = [
   { id: 'suv', name: 'SUV', price: 356 },
   { id: 'electric', name: '新能源', price: 199 },
@@ -10,8 +9,8 @@ const categories = [
 const baseVehicle = {
   name: '丰田普拉多',
   year: '2025款',
-  specs: '8挡手自一体 | 2.4T 双擎 | 4门5座',
-  features: '全时四驱 | 360°全景影像 | 可放4个28寸行李箱',
+  specs: '8挡手自一体 | 2.4T | 4门5座',
+  features: '全时四驱 | 360全景影像 | 可放4个28寸行李箱',
   tags: ['豪华SUV', '硬派越野'],
   price: 598,
   unit: '车/日',
@@ -39,8 +38,8 @@ const vehicles = [
     id: 5,
     name: '别克GL8',
     year: '2025款',
-    specs: '9挡手自一体 | 2.0T | 5门7座',
-    features: '电动侧滑门 | 独立座椅 | 适合商务接待',
+    specs: '2.0T | 7座 | 商务接待',
+    features: '电动侧滑门 | 独立座椅 | 大空间',
     tags: ['商务车', '舒适大空间'],
     price: 698,
     category: '商务车'
@@ -50,8 +49,8 @@ const vehicles = [
     id: 6,
     name: '大众朗逸',
     year: '2025款',
-    specs: '7挡双离合 | 1.5T | 4门5座',
-    features: '省油耐用 | 城市通勤 | 可放2个24寸行李箱',
+    specs: '1.5T | 4门5座 | 城市通勤',
+    features: '省油耐用 | 高性价比 | 适合代步',
     tags: ['经济型', '高性价比'],
     price: 268,
     category: '经济型'
@@ -61,8 +60,8 @@ const vehicles = [
     id: 7,
     name: '奔驰V级',
     year: '2025款',
-    specs: '9挡手自一体 | 2.0T | 5门7座',
-    features: '航空座椅 | 高端接待 | 大容量行李空间',
+    specs: '2.0T | 7座 | 高端接待',
+    features: '航空座椅 | 宽适空间 | 尊享出行',
     tags: ['豪华型', '尊享出行'],
     price: 998,
     category: '豪华型'
@@ -75,19 +74,44 @@ Page({
     activeCategory: 0,
     filteredVehicles: [],
     searchKeyword: '',
-    bottomTabs: [
-      { key: 'home', text: '主页', pagePath: '/pages/home/home', icon: '/images/tab-home.png' },
-      { key: 'vehicle', text: '车辆', pagePath: '/pages/vehicle/vehicle', icon: '/images/tab-car-active.png', active: true },
-      { key: 'service', text: '附加服务', pagePath: '/pages/service/service', icon: '/images/tab-service.png' },
-      { key: 'schedule', text: '计划', pagePath: '/pages/schedule/schedule', icon: '/images/tab-calendar.png' }
-    ]
+    searchBarStyle: '',
+    capsuleStyle: ''
   },
 
   onLoad() {
+    this.updateCapsuleMetrics()
     this.filterVehicles()
   },
 
-  onShow() {},
+  updateCapsuleMetrics() {
+    const systemInfo = wx.getSystemInfoSync()
+    const statusBarHeight = systemInfo.statusBarHeight || 0
+    const menuButton = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
+
+    if (!menuButton || !menuButton.width) {
+      this.setData({
+        searchBarStyle: `margin-top:${statusBarHeight + 12}px; padding-right:40rpx; height:44px;`,
+        capsuleStyle: ''
+      })
+      return
+    }
+
+    const rightGap = systemInfo.windowWidth - menuButton.right
+    this.setData({
+      searchBarStyle: [
+        `margin-top:${menuButton.top}px`,
+        `padding-right:${menuButton.width + rightGap + 18}px`,
+        `height:${menuButton.height}px`
+      ].join(';'),
+      capsuleStyle: [
+        'position:fixed',
+        `top:${menuButton.top}px`,
+        `right:${rightGap}px`,
+        `width:${menuButton.width}px`,
+        `height:${menuButton.height}px`
+      ].join(';')
+    })
+  },
 
   filterVehicles() {
     const { activeCategory, searchKeyword } = this.data
@@ -95,24 +119,15 @@ Page({
     const keyword = searchKeyword.trim()
     const filteredVehicles = vehicles.filter((vehicle) => {
       const matchesCategory = vehicle.category === category
-      const searchText = [
-        vehicle.name,
-        vehicle.year,
-        vehicle.category,
-        vehicle.specs,
-        vehicle.features,
-        ...vehicle.tags
-      ].join(' ')
-      const matchesKeyword = !keyword || searchText.includes(keyword)
-      return matchesCategory && matchesKeyword
+      const searchText = [vehicle.name, vehicle.year, vehicle.category, vehicle.specs, vehicle.features, ...vehicle.tags].join(' ')
+      return matchesCategory && (!keyword || searchText.includes(keyword))
     })
 
     this.setData({ filteredVehicles })
   },
 
   onCategoryTap(e) {
-    const index = e.currentTarget.dataset.index
-    this.setData({ activeCategory: index })
+    this.setData({ activeCategory: e.currentTarget.dataset.index })
     this.filterVehicles()
   },
 
@@ -121,19 +136,9 @@ Page({
     this.filterVehicles()
   },
 
-  onBottomTabTap(e) {
-    const pagePath = e.currentTarget.dataset.path
-    if (!pagePath || pagePath === '/pages/vehicle/vehicle') return
-
-    wx.redirectTo({
-      url: pagePath
-    })
-  },
-
   onVehicleTap(e) {
-    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/vehicle-detail/vehicle-detail?id=${id}`
+      url: `/pages/vehicle-detail/vehicle-detail?id=${e.currentTarget.dataset.id}`
     })
   }
 })

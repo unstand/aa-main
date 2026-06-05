@@ -3,7 +3,7 @@
   <view class="page-blur"></view>
   <view class="bg-mask"></view>
 
-  <view class="search-bar">
+  <view class="search-bar" style="{{searchBarStyle}}">
     <view class="search-inner">
       <input
         class="search-input"
@@ -14,26 +14,27 @@
       />
       <image class="search-icon" src="/images/sousuo.png" mode="aspectFit" />
     </view>
+    <view class="capsule-btn" style="{{capsuleStyle}}">
+      <view class="capsule-dots">
+        <view class="capsule-dot"></view>
+        <view class="capsule-dot"></view>
+        <view class="capsule-dot"></view>
+      </view>
+      <view class="capsule-split"></view>
+      <view class="capsule-ring"></view>
+    </view>
   </view>
 
   <view class="main-content">
     <scroll-view scroll-y class="category-sidebar" enhanced show-scrollbar="{{false}}">
-      <view class="category-item {{activeCategory === index ? 'active' : ''}}" 
-            wx:for="{{categories}}" wx:key="id" 
-            bindtap="onCategoryTap" data-index="{{index}}">
+      <view class="category-item {{activeCategory === index ? 'active' : ''}}" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-index="{{index}}">
         <text class="cat-name">{{item.name}}</text>
         <text class="cat-price">¥{{item.price}}起</text>
       </view>
     </scroll-view>
 
     <scroll-view scroll-y class="vehicle-list" enhanced show-scrollbar="{{false}}">
-      <view
-        class="vehicle-card"
-        wx:for="{{filteredVehicles}}"
-        wx:key="id"
-        bindtap="onVehicleTap"
-        data-id="{{item.id}}"
-      >
+      <view class="vehicle-card" wx:for="{{filteredVehicles}}" wx:key="id" bindtap="onVehicleTap" data-id="{{item.id}}">
         <view class="car-photo-wrap">
           <image class="car-photo" src="{{item.image}}" mode="aspectFill" />
         </view>
@@ -45,7 +46,7 @@
               <text class="vehicle-year">{{item.year}}</text>
             </view>
             <view class="video-badge" wx:if="{{item.hasVideo}}">
-              <text class="video-icon">♪</text>
+              <text class="video-icon">▶</text>
             </view>
           </view>
 
@@ -68,16 +69,5 @@
     </scroll-view>
   </view>
 
-  <view class="bottom-nav">
-    <view
-      class="bottom-nav-item {{item.active ? 'active' : ''}}"
-      wx:for="{{bottomTabs}}"
-      wx:key="key"
-      bindtap="onBottomTabTap"
-      data-path="{{item.pagePath}}"
-    >
-      <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
-      <text class="bottom-nav-text">{{item.text}}</text>
-    </view>
-  </view>
+  <app-tabbar activeKey="vehicle"></app-tabbar>
 </view>

@@ -1,5 +1,5 @@
-// pages/home/home.js
 const app = getApp()
+
 Page({
   data: {
     plans: [],
@@ -8,49 +8,109 @@ Page({
     showLoginModal: false,
     showLoginBar: true,
     isLoggedIn: false,
-    carouselDots: [0, 1, 2, 3, 4],
-    bottomTabs: [
-      { key: 'home', text: '主页', pagePath: '/pages/home/home', icon: '/images/tab-home-active.png', active: true },
-      { key: 'vehicle', text: '车辆', pagePath: '/pages/vehicle/vehicle', icon: '/images/tab-car.png' },
-      { key: 'service', text: '附加服务', pagePath: '/pages/service/service', icon: '/images/tab-service.png' },
-      { key: 'schedule', text: '计划', pagePath: '/pages/schedule/schedule', icon: '/images/tab-calendar.png' }
-    ]
+    statusBarHeight: 0,
+    navBarHeight: 0,
+    topShellStyle: '',
+    capsuleStyle: ''
   },
 
+  noop() {},
+
   onLoad() {
-    const plans = (app.globalData.plans || []).map((plan) => ({
-      ...plan,
-      displayTitle: plan.id === 1 ? '塔吉克恶魔之眼探秘' : plan.title,
-      seasonLabel: `夏季 ${plan.rating}`
-    }))
+    this.updateCapsuleMetrics()
 
     this.setData({
-      plans,
-      centralAsiaPlans: [
+      plans: [
         {
-          id: 3,
-          title: '中亚五国探秘之旅',
-          displayTitle: '塔吉克恶魔之眼探秘',
-          subtitle: '一带一路·文明交汇',
-          description: '与众不同的新疆人文之旅，认识了很苦热情有趣的人们，特别是在塔克拉玛干沙漠沙暴的体验，绝对称得上人生之旅！',
+          id: 1,
+          displayTitle: '塔吉克魔之眼探秘',
+          description: '与众不同的新疆人文线，认识了很多热情有趣的异域朋友，领略了与众不同的地域文化，很喜欢这次旅程的设计，特别是在塔克拉玛干夜游沙漠的体验，绝对称得上人生之一。',
           price: 10828,
           unit: '人',
           days: 6,
           nights: 5,
           distance: '950KM',
-          tags: ['丝绸之路', '一带一路', '车辆应急', '高原氧气', '户外摄影', '紧急通讯', '烤全羊包', '户外露营'],
-          rating: 8.23,
-          seasonLabel: '夏季 8.23',
-          image: '/images/plan-silk-road.png',
-          needLogin: true
+          tags: ['地质病险', '星空摄影', '车辆应急', '高原氧气', '户外摄影', '紧急通讯', '终生羊包', '户外露营'],
+          rating: '8.23',
+          image: '/images/plan-evil-eye.png'
+        },
+        {
+          id: 2,
+          displayTitle: '丝路秘境漫游',
+          description: '纵横山谷和峡谷秘境，串联人文古迹与风貌聚落，整体节奏舒展克制，适合首次尝试深度旅行的人。',
+          price: 10828,
+          unit: '人',
+          days: 6,
+          nights: 5,
+          distance: '950KM',
+          tags: ['地质病险', '星空摄影', '车辆应急', '高原氧气'],
+          rating: '8.23',
+          image: '/images/plan-silk-road.png'
+        }
+      ],
+      centralAsiaPlans: [
+        {
+          id: 3,
+          displayTitle: '塔吉克魔之眼探秘',
+          subtitle: '高端商务  一带一路',
+          description: '与众不同的新疆人文线，认识了很多热情有趣的异域朋友，领略了与众不同的地域文化，很喜欢这次旅程的设计，特别是在塔克拉玛干夜游沙漠的体验，绝对称得上人生之一。',
+          price: 10828,
+          unit: '人',
+          days: 6,
+          nights: 5,
+          distance: '950KM',
+          tags: ['高端商务', '一带一路', '车辆应急', '高原氧气', '户外摄影', '户外露营'],
+          image: '/images/邀请长图（新疆自驾） 1.png'
         }
       ]
     })
   },
 
+  updateCapsuleMetrics() {
+    const systemInfo = wx.getSystemInfoSync()
+    const statusBarHeight = systemInfo.statusBarHeight || 0
+    const menuButton = wx.getMenuButtonBoundingClientRect
+      ? wx.getMenuButtonBoundingClientRect()
+      : null
+
+    if (!menuButton || !menuButton.width) {
+      this.setData({
+        statusBarHeight,
+        navBarHeight: 44,
+        topShellStyle: `margin-top:${statusBarHeight + 12}px; padding-right:22rpx; height:44px;`,
+        capsuleStyle: ''
+      })
+      return
+    }
+
+    const rightGap = systemInfo.windowWidth - menuButton.right
+    const navBarHeight = menuButton.height
+    const topShellStyle = [
+      `margin-top:${menuButton.top}px`,
+      `padding-right:${menuButton.width + rightGap + 18}px`,
+      `height:${navBarHeight}px`
+    ].join(';')
+
+    const capsuleStyle = [
+      'position:fixed',
+      `top:${menuButton.top}px`,
+      `right:${rightGap}px`,
+      `width:${menuButton.width}px`,
+      `height:${menuButton.height}px`
+    ].join(';')
+
+    this.setData({
+      statusBarHeight,
+      navBarHeight,
+      topShellStyle,
+      capsuleStyle
+    })
+  },
+
   onShow() {
-    const isLoggedIn = app.globalData.isLoggedIn
-    this.setData({ isLoggedIn })
+    this.setData({
+      isLoggedIn: !!app.globalData.isLoggedIn
+    })
   },
 
   onSearchInput(e) {
@@ -67,11 +127,11 @@ Page({
   },
 
   onCentralAsiaTap(e) {
-    const isLoggedIn = app.globalData.isLoggedIn
-    if (!isLoggedIn) {
+    if (!app.globalData.isLoggedIn) {
       this.setData({ showLoginModal: true })
       return
     }
+
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `/pages/plan-detail/plan-detail?id=${id}`
@@ -100,16 +160,5 @@ Page({
     })
   },
 
-  onBottomTabTap(e) {
-    const pagePath = e.currentTarget.dataset.path
-    if (!pagePath || pagePath === '/pages/home/home') return
-
-    wx.redirectTo({
-      url: pagePath
-    })
-  },
-
-  onMoreMenu() {
-    // 更多菜单
-  }
+  onMoreMenu() {}
 })

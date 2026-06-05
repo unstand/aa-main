@@ -32,9 +32,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 40rpx;
-  padding-top: calc(88rpx + env(safe-area-inset-top));
-  padding-bottom: 20rpx;
+  padding: 0 40rpx 20rpx;
   z-index: 10;
     /* ❌ 删除背景 */
     background: transparent;
@@ -78,6 +76,45 @@
   margin-left: 12rpx;
   opacity: 0.6;
   flex-shrink: 0;
+}
+
+.capsule-btn {
+  position: fixed;
+  border-radius: 26rpx;
+  background: rgba(255, 247, 239, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14rpx;
+  box-sizing: border-box;
+  z-index: 12;
+}
+
+.capsule-dots {
+  display: flex;
+  gap: 6rpx;
+  align-items: center;
+}
+
+.capsule-dot {
+  width: 6rpx;
+  height: 6rpx;
+  border-radius: 50%;
+  background: #1d1d1d;
+}
+
+.capsule-split {
+  width: 1rpx;
+  height: 18rpx;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.capsule-ring {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  border: 3rpx solid #1d1d1d;
+  box-sizing: border-box;
 }
 .main-content {
   position: relative;

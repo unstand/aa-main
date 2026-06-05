@@ -1,0 +1,13 @@
+<view class="bottom-nav">
+  <view
+    class="bottom-nav-item {{item.key === activeKey ? 'active' : ''}}"
+    wx:for="{{tabs}}"
+    wx:key="key"
+    bindtap="onTabTap"
+    data-path="{{item.pagePath}}"
+    data-key="{{item.key}}"
+  >
+    <image class="bottom-nav-icon" src="{{item.icon}}" mode="aspectFit" />
+    <text class="bottom-nav-text">{{item.text}}</text>
+  </view>
+</view>

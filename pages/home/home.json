@@ -2,5 +2,8 @@
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#1a1a2e",
-  "navigationBarTitleText": "探索旅行"
+  "navigationBarTitleText": "探索旅行",
+  "usingComponents": {
+    "app-tabbar": "/components/app-tabbar/app-tabbar"
+  }
 }
