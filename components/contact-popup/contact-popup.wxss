@@ -1,0 +1,87 @@
+.contact-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(9, 15, 24, 0.18);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 18rpx 18rpx;
+  box-sizing: border-box;
+}
+
+.contact-sheet {
+  width: 100%;
+  max-width: 574rpx;
+  min-height: 294rpx;
+  padding: 28rpx 20rpx 20rpx;
+  border-radius: 26rpx;
+  background:
+    linear-gradient(180deg, rgba(134, 143, 152, 0.34), rgba(110, 119, 128, 0.28)),
+    rgba(98, 108, 118, 0.22);
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 18rpx 42rpx rgba(8, 14, 22, 0.24),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.16);
+}
+
+.contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 54rpx;
+  margin-top: 8rpx;
+  margin-bottom: 34rpx;
+}
+
+.contact-icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.contact-icon-image {
+  display: block;
+}
+
+.contact-icon-wechat,
+.contact-icon-douyin {
+  width: 62rpx;
+  height: 62rpx;
+}
+
+.contact-icon-xiaohongshu {
+  width: 70rpx;
+  height: 44rpx;
+}
+
+.contact-phone {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.contact-phone-image {
+  width: 58rpx;
+  height: 58rpx;
+  display: block;
+}
+
+.contact-cancel {
+  width: 492rpx;
+  max-width: 100%;
+  height: 44rpx;
+  margin: 0 auto;
+  border-radius: 14rpx;
+  background: #8ceef0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111214;
+  font-size: 20rpx;
+  font-weight: 700;
+}

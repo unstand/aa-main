@@ -1,13 +1,5 @@
-<!--pages/home/home.wxml-->
-<!-- 背景图 -->
-<image
-  class="bg-image"
-  src="/images/home-bj.png"
-  mode="aspectFill"
-></image>
-<!-- 蒙层 -->
-<view class="mask"></view>
-<view class="home-page">
+
+<view style="  background-image: url('/images/home-bj.png');" class="home-page">
   <!-- 搜索栏 -->
   <view class="search-bar">
     <image class="moon-logo" src="/images/logo.png" mode="aspectFit"/>

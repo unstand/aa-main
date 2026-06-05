@@ -30,7 +30,7 @@
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  background-color: transparent;
+
 }
 
 
@@ -44,13 +44,14 @@
   padding-top: calc(88rpx + env(safe-area-inset-top));
   padding-bottom: 20rpx;
   z-index: 10;
-    /* ❌ 删除背景 */
-    background: transparent;
+  /* ❌ 删除背景 */
+  background: transparent;
 
-    /* ❌ 删除毛玻璃 */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+  /* ❌ 删除毛玻璃 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
+
 .moon-logo {
   width: 30px;
   height: 29px;
@@ -58,6 +59,7 @@
   left: 18px;
   z-index: 10;
 }
+
 .search-inner {
   width: 177px;
   height: 26px;
@@ -98,11 +100,19 @@
   height: calc(100vh - 100rpx);
 }
 
-.scroll-bottom-space { height: calc(150rpx + env(safe-area-inset-bottom)); }
+.scroll-bottom-space {
+  height: calc(150rpx + env(safe-area-inset-bottom));
+}
 
 /* 区块标题 */
-.section { margin-bottom: 28rpx; }
-.section-header { padding: 16rpx 32rpx 12rpx; }
+.section {
+  margin-bottom: 28rpx;
+}
+
+.section-header {
+  padding: 16rpx 32rpx 12rpx;
+}
+
 .section-title {
   font-family: "Alimama FangYuanTi VF";
   font-weight: 700;
@@ -112,7 +122,10 @@
 }
 
 /* 横向滚动 */
-.plan-scroll { white-space: nowrap; }
+.plan-scroll {
+  white-space: nowrap;
+}
+
 .plan-cards {
   display: flex;
   padding: 0 32rpx;
@@ -370,12 +383,10 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(
-    90deg,
-    rgba(10, 15, 25, 0.78) 0%,
-    rgba(10, 15, 25, 0.45) 55%,
-    rgba(10, 15, 25, 0.15) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(10, 15, 25, 0.78) 0%,
+      rgba(10, 15, 25, 0.45) 55%,
+      rgba(10, 15, 25, 0.15) 100%);
 }
 
 .diy-row {
@@ -450,9 +461,20 @@
   margin-bottom: 32rpx;
 }
 
-.modal-btns { display: flex; gap: 16rpx; }
-.modal-cancel { flex: 1; padding: 20rpx 0; }
-.modal-confirm { flex: 1; padding: 20rpx 0; }
+.modal-btns {
+  display: flex;
+  gap: 16rpx;
+}
+
+.modal-cancel {
+  flex: 1;
+  padding: 20rpx 0;
+}
+
+.modal-confirm {
+  flex: 1;
+  padding: 20rpx 0;
+}
 
 .bottom-nav {
   position: fixed;

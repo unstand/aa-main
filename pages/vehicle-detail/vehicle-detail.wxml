@@ -1,175 +1,152 @@
-<!--pages/vehicle-detail/vehicle-detail.wxml-->
 <view class="detail-page">
+  <image class="page-bg" src="/images/home-bj.png" mode="aspectFill" />
+  <view class="page-mask"></view>
+  <view class="page-frost"></view>
+
+  <view class="status-bar"></view>
+
+  <view class="top-bar">
+    <view class="nav-back" bindtap="onBack">
+      <text class="nav-back-icon">&lt;</text>
+    </view>
+    <view class="nav-actions">
+      <text class="nav-dots">...</text>
+      <view class="nav-split"></view>
+      <view class="nav-circle"></view>
+    </view>
+  </view>
+
   <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
-    <!-- 车辆信息卡片 -->
-    <view class="vehicle-section" wx:if="{{vehicle}}">
-      <!-- 车辆图片 -->
-      <view class="vehicle-img-wrap">
-        <view class="vehicle-img-placeholder">
-          <text class="vehicle-icon">🚗</text>
-        </view>
-        <view class="video-badge">
-          <text class="video-icon">♪</text>
+    <view class="glass-card hero-card">
+      <view class="hero-image-wrap">
+        <image class="hero-image" src="{{vehicle.image}}" mode="aspectFit" />
+        <view class="media-badge">♪</view>
+        <view class="hero-dots">
+          <view class="hero-dot {{item === activeSlide ? 'active' : ''}}" wx:for="{{carouselDots}}" wx:key="*this"></view>
         </view>
       </view>
-      <!-- 车辆名称与规格 -->
-      <view class="vehicle-info">
-        <text class="vehicle-name">{{vehicle.name}}</text>
+
+      <view class="vehicle-summary">
+        <view class="title-row">
+          <text class="vehicle-name">{{vehicle.name}}</text>
+          <text class="vehicle-year">{{vehicle.year}}</text>
+        </view>
         <text class="vehicle-specs">{{vehicle.specs}}</text>
       </view>
 
-      <!-- 数量与价格 -->
-      <view class="quantity-price-row">
-        <view class="quantity-label">数量</view>
-        <view class="quantity-selector">
-          <view class="qty-btn {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">
-            <text>−</text>
-          </view>
+      <view class="booking-row">
+        <view class="quantity-box">
+          <text class="quantity-label">数量</text>
+          <view class="quantity-action {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">-</view>
           <text class="quantity-value">{{quantity}}</text>
-          <view class="qty-btn" bindtap="onQuantityPlus">
-            <text>+</text>
-          </view>
+          <view class="quantity-action" bindtap="onQuantityPlus">+</view>
         </view>
-        <text class="unit-price">¥{{vehicle.price}}/{{vehicle.unit}}</text>
+        <text class="price-text">¥{{vehicle.price}}/车/日</text>
       </view>
 
-      <!-- 时间选择 -->
-      <view class="date-section">
-        <view class="date-row">
-          <view class="date-item">
-            <text class="date-value">{{startDate}}</text>
-            <text class="date-arrow">▼</text>
+      <view class="date-panel">
+        <view class="date-col">
+          <view class="date-main-row">
+            <text class="date-main">{{startDateText}}</text>
+            <text class="date-arrow">▾</text>
           </view>
-          <view class="date-duration">
-            <text class="duration-text">共 {{totalDays}} 日</text>
+          <text class="date-sub">{{startWeekday}} {{startTime}}</text>
+        </view>
+        <view class="date-center">共 {{totalDays}} 日</view>
+        <view class="date-col date-col-right">
+          <view class="date-main-row">
+            <text class="date-main">{{endDateText}}</text>
+            <text class="date-arrow">▾</text>
           </view>
-          <view class="date-item date-item-right">
-            <text class="date-value">{{endDate}}</text>
-            <text class="date-arrow">▼</text>
-          </view>
+          <text class="date-sub">{{endWeekday}} {{endTime}}</text>
         </view>
       </view>
 
-      <!-- 地点信息 -->
-      <view class="location-section">
-        <view class="location-row">
+      <view class="location-grid">
+        <view class="location-card city-card">
           <text class="location-label">城市</text>
           <text class="location-value">{{city}}</text>
         </view>
-        <view class="location-row">
+        <view class="location-card location-card-wide">
           <text class="location-label">取车点</text>
           <text class="location-value">{{pickupPoint}}</text>
         </view>
       </view>
     </view>
 
-    <!-- 驾驶员信息 -->
-    <view class="driver-section">
-      <view class="section-top">
+    <view class="glass-card info-card">
+      <view class="section-head">
         <text class="section-title">驾驶员信息</text>
-        <view class="view-all" bindtap="onViewAllDrivers">
-          <text class="view-all-text">全部驾驶员 ›</text>
+        <view class="section-link" bindtap="onViewAllDrivers">
+          <text class="section-link-text">全部驾驶员</text>
+          <text class="section-link-arrow">›</text>
         </view>
       </view>
-      <view class="add-driver-btn" bindtap="onAddDriver">
-        <text class="add-driver-text">+ 点击新增驾驶员</text>
+
+      <view class="add-driver" bindtap="onAddDriver">
+        <text class="add-driver-icon">⊕</text>
+        <text class="add-driver-text">点击新增驾驶员</text>
       </view>
-      <view class="driver-notice">
-        <text class="notice-title">取车材料：</text>
-        <text class="notice-item">1. 驾驶员本人有效身份证原件</text>
-        <text class="notice-item">2. 驾驶证原件(支持12123电子驾照)，驾龄1年以上</text>
+
+      <view class="material-row">
+        <text class="material-title">取车材料</text>
+        <view class="material-divider"></view>
+        <view class="material-list">
+          <text class="material-item">1.驾驶员本人有效身份证原件</text>
+          <text class="material-item">2.驾驶证原件(支持12123电子驾照)，驾龄1年以上</text>
+        </view>
       </view>
     </view>
 
-    <!-- 车辆保障 -->
-    <view class="insurance-section">
-      <view class="section-top">
-        <view class="insurance-title-row">
+    <view class="glass-card insurance-card">
+      <view class="section-head insurance-head">
+        <view class="insurance-head-left">
           <text class="section-title">车辆保障</text>
-          <text class="insurance-provider">太平洋险提供保障</text>
+          <text class="insurance-provider">太平洋车险提供保障</text>
+        </view>
+        <view class="section-link" bindtap="onViewInsuranceDetail">
+          <text class="section-link-text">保障说明</text>
+          <text class="section-link-arrow">›</text>
         </view>
       </view>
 
-      <!-- 保障方案对比表 -->
       <view class="insurance-table">
-        <!-- 表头 -->
-        <view class="table-row table-header">
-          <view class="table-cell cell-label"></view>
-          <view class="table-cell cell-plan {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id"
-                bindtap="onSelectInsurance" data-id="{{item.id}}">
+        <view class="insurance-label-col">
+          <view class="table-head-spacer">保障项目</view>
+          <view class="label-cell" wx:for="{{insuranceRows}}" wx:key="key">{{item.label}}</view>
+        </view>
+
+        <view class="insurance-plan-col {{selectedInsurance === item.id ? 'selected' : ''}}" wx:for="{{insurancePlans}}" wx:key="id">
+          <view class="plan-head" bindtap="onSelectInsurance" data-id="{{item.id}}">
             <text class="plan-name">{{item.name}}</text>
+            <text class="plan-arrow">›</text>
           </view>
-        </view>
-        <!-- 车损保障 -->
-        <view class="table-row">
-          <view class="table-cell cell-label"><text class="cell-label-text">车损保障</text></view>
-          <view class="table-cell cell-value {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id">
-            <text class="cell-value-text">{{item.features.damage}}</text>
+          <view class="plan-cell" wx:for="{{insuranceRows}}" wx:for-item="row" wx:key="key">
+            <text class="plan-cell-text">{{item.features[row.key]}}</text>
           </view>
-        </view>
-        <!-- 三者保障 -->
-        <view class="table-row">
-          <view class="table-cell cell-label"><text class="cell-label-text">三者保障</text></view>
-          <view class="table-cell cell-value {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id">
-            <text class="cell-value-text">{{item.features.thirdParty}}</text>
-          </view>
-        </view>
-        <!-- 折旧费 -->
-        <view class="table-row">
-          <view class="table-cell cell-label"><text class="cell-label-text">折旧费</text></view>
-          <view class="table-cell cell-value {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id">
-            <text class="cell-value-text">{{item.features.depreciation}}</text>
-          </view>
-        </view>
-        <!-- 停运费 -->
-        <view class="table-row">
-          <view class="table-cell cell-label"><text class="cell-label-text">停运费</text></view>
-          <view class="table-cell cell-value {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id">
-            <text class="cell-value-text">{{item.features.operationLoss}}</text>
-          </view>
-        </view>
-        <!-- 费用行 -->
-        <view class="table-row table-cost-row">
-          <view class="table-cell cell-label"><text class="cell-label-text">费用</text></view>
-          <view class="table-cell cell-value {{selectedInsurance === item.id ? 'selected' : ''}}" 
-                wx:for="{{insurancePlans}}" wx:key="id">
-            <text class="cell-cost-text">{{item.costDisplay}}</text>
-          </view>
-        </view>
-        <!-- 选择按钮 -->
-        <view class="table-row">
-          <view class="table-cell cell-label"></view>
-          <view class="table-cell cell-btn" wx:for="{{insurancePlans}}" wx:key="id">
-            <view class="select-btn {{selectedInsurance === item.id ? 'active' : ''}}" 
-                  bindtap="onSelectInsurance" data-id="{{item.id}}">
-              <text class="select-btn-text">{{selectedInsurance === item.id ? '已选' : '选择'}}</text>
-            </view>
+          <view class="plan-select {{selectedInsurance === item.id ? 'active' : ''}}" bindtap="onSelectInsurance" data-id="{{item.id}}">
+            <text class="plan-select-text">{{selectedInsurance === item.id ? item.selectedText : '选择'}}</text>
           </view>
         </view>
       </view>
     </view>
 
-    <view class="safe-bottom"></view>
+    <view class="bottom-space"></view>
   </scroll-view>
 
-  <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <view class="bar-price">
-      <text class="bar-price-label">总价：</text>
-      <text class="bar-price-value">¥{{totalPrice}}</text>
-    </view>
-    <view class="bar-actions">
-      <view class="bar-btn bar-btn-contact" bindtap="onContactUs">
-        <text>联系我们</text>
+  <view class="bottom-shell">
+    <view class="bottom-bar">
+      <view class="total-box">
+        <text class="total-label">总价：</text>
+        <text class="total-value">¥{{totalPrice}}</text>
       </view>
-      <view class="bar-btn bar-btn-action" bindtap="onGeneratePlan">
-        <text>生成计划</text>
+      <view class="action-btn contact-btn" bindtap="onContactUs">联系我们</view>
+      <view class="action-btn primary-btn" bindtap="onGeneratePlan">
+        <text class="primary-free">free</text>
+        <text class="primary-text">生成计划</text>
       </view>
     </view>
   </view>
+
+  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
 </view>

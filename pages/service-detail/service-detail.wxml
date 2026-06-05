@@ -1,120 +1,115 @@
-<!--pages/service-detail/service-detail.wxml-->
 <view class="detail-page">
-  <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
-    <!-- 产品图片区域 -->
-    <view class="product-hero" wx:if="{{service}}">
-      <view class="hero-img-wrap">
-        <view class="hero-img-placeholder">
-          <text class="hero-icon">🎒</text>
-        </view>
-        <view class="video-badge">
-          <text class="video-icon">♪</text>
-        </view>
-      </view>
+  <image class="page-bg" src="/images/邀请长图（新疆自驾） 1.png" mode="aspectFill" />
+  <view class="page-mask"></view>
+  <view class="page-frost"></view>
+
+  <view class="status-bar"></view>
+
+  <view class="top-bar">
+    <view class="nav-back" bindtap="onBack">
+      <text class="nav-back-icon">&lt;</text>
     </view>
+    <view class="nav-actions">
+      <text class="nav-dots">...</text>
+      <view class="nav-split"></view>
+      <view class="nav-circle"></view>
+    </view>
+  </view>
 
-    <!-- 产品基本信息 -->
-    <view class="product-section" wx:if="{{service}}">
-      <view class="product-title-row">
-        <text class="product-name">{{service.name}}</text>
-        <text class="dropdown-icon">▼</text>
+  <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="glass-card hero-card">
+      <view class="hero-image-wrap">
+        <image class="hero-image" src="{{service.image}}" mode="aspectFill" />
+        <view class="media-badge">♪</view>
+        <view class="hero-dots">
+          <view class="hero-dot {{item === activeSlide ? 'active' : ''}}" wx:for="{{carouselDots}}" wx:key="*this"></view>
+        </view>
       </view>
-      <text class="product-items">{{service.items}}</text>
 
-      <!-- 数量与价格 -->
-      <view class="quantity-price-row">
-        <view class="quantity-label">数量</view>
-        <view class="quantity-selector">
-          <view class="qty-btn {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">
-            <text>−</text>
-          </view>
+      <view class="service-summary">
+        <view class="title-row">
+          <text class="service-name">{{service.name}}</text>
+          <text class="dropdown-icon">▾</text>
+        </view>
+        <text class="service-items">{{service.items}}</text>
+      </view>
+
+      <view class="booking-row">
+        <view class="quantity-box">
+          <text class="quantity-label">数量</text>
+          <view class="quantity-action {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">-</view>
           <text class="quantity-value">{{quantity}}</text>
-          <view class="qty-btn" bindtap="onQuantityPlus">
-            <text>+</text>
-          </view>
+          <view class="quantity-action" bindtap="onQuantityPlus">+</view>
         </view>
-        <text class="unit-price">¥{{service.price}}/{{service.unit}}</text>
+        <text class="price-text">¥{{service.price}}/包/日</text>
       </view>
 
-      <!-- 时间选择 -->
-      <view class="date-section">
-        <view class="date-row">
-          <view class="date-item">
-            <text class="date-value">{{startDate}}</text>
-            <text class="date-arrow">▼</text>
+      <view class="date-panel">
+        <view class="date-col">
+          <view class="date-main-row">
+            <text class="date-main">{{startDateText}}</text>
+            <text class="date-arrow">▾</text>
           </view>
-          <view class="date-duration">
-            <text class="duration-text">共 {{totalDays}} 日</text>
+          <text class="date-sub">{{startWeekday}} {{startTime}}</text>
+        </view>
+        <view class="date-center">共 5 日</view>
+        <view class="date-col date-col-right">
+          <view class="date-main-row">
+            <text class="date-main">{{endDateText}}</text>
+            <text class="date-arrow">▾</text>
           </view>
-          <view class="date-item date-item-right">
-            <text class="date-value">{{endDate}}</text>
-            <text class="date-arrow">▼</text>
-          </view>
+          <text class="date-sub">{{endWeekday}} {{endTime}}</text>
         </view>
       </view>
 
-      <!-- 地点信息 -->
-      <view class="location-section">
-        <view class="location-row">
+      <view class="location-grid">
+        <view class="location-card city-card">
           <text class="location-label">城市</text>
           <text class="location-value">{{city}}</text>
         </view>
-        <view class="location-row">
+        <view class="location-card location-card-wide">
           <text class="location-label">取包点</text>
           <text class="location-value">{{pickupPoint}}</text>
         </view>
       </view>
     </view>
 
-    <!-- 套餐选择 -->
-    <view class="package-section">
-      <scroll-view scroll-x class="package-scroll" enhanced show-scrollbar="{{false}}">
-        <view class="package-options">
-          <view class="package-card {{selectedPackage === item.id ? 'selected' : ''}}" 
-                wx:for="{{packageOptions}}" wx:key="id" 
-                bindtap="onSelectPackage" data-id="{{item.id}}">
-            <view class="package-header">
-              <text class="package-name">{{item.name}}</text>
-              <text class="package-price-add">{{item.priceAdd > 0 ? '+¥' + item.priceAdd : '+¥0'}}</text>
-            </view>
-            <text class="package-items">{{item.items}}</text>
+    <scroll-view scroll-x class="package-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="package-row">
+        <view class="package-card {{selectedPackage === item.id ? 'selected' : ''}}" wx:for="{{packageOptions}}" wx:key="id" bindtap="onSelectPackage" data-id="{{item.id}}">
+          <view class="package-head">
+            <text class="package-name">{{item.name}}</text>
+            <text class="package-price">{{item.priceLabel}}</text>
           </view>
+          <text class="package-items">{{item.items}}</text>
         </view>
-      </scroll-view>
-    </view>
+      </view>
+    </scroll-view>
 
-    <!-- 使用须知 -->
     <view class="notice-section">
-      <view class="notice-header">
+      <view class="notice-head">
         <text class="notice-title">使用须知</text>
-        <view class="notice-underline"></view>
+        <view class="notice-line"></view>
       </view>
-      <view class="notice-content">
-        <view class="notice-img-placeholder">
-          <image class="notice-bg-img" src="/images/邀请长图（新疆自驾） 1.png" mode="aspectFill"></image>
-          <view class="notice-overlay">
-            <text class="notice-text">请在使用前仔细阅读使用说明和安全注意事项</text>
-          </view>
-        </view>
-      </view>
+      <view class="notice-panel"></view>
     </view>
 
-    <view class="safe-bottom"></view>
+    <view class="bottom-space"></view>
   </scroll-view>
 
-  <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <view class="bar-price">
-      <text class="bar-price-label">总价：</text>
-      <text class="bar-price-value">¥{{totalPrice}}</text>
-    </view>
-    <view class="bar-actions">
-      <view class="bar-btn bar-btn-contact" bindtap="onContactUs">
-        <text>联系我们</text>
+  <view class="bottom-shell">
+    <view class="bottom-bar">
+      <view class="total-box">
+        <text class="total-label">总价：</text>
+        <text class="total-value">¥{{totalPrice}}</text>
       </view>
-      <view class="bar-btn bar-btn-action" bindtap="onGeneratePlan">
-        <text>生成计划</text>
+      <view class="action-btn contact-btn" bindtap="onContactUs">联系我们</view>
+      <view class="action-btn primary-btn" bindtap="onGeneratePlan">
+        <text class="primary-free">free</text>
+        <text class="primary-text">生成计划</text>
       </view>
     </view>
   </view>
+
+  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
 </view>
