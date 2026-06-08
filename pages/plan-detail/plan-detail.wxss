@@ -406,7 +406,6 @@
   font-size: 16rpx;
   color: #425060;
 }
-
 .resource-image-shell {
   height: 126rpx;
   border-radius: 18rpx;
