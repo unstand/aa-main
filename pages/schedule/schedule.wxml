@@ -1,0 +1,181 @@
+<view class="schedule-page">
+  <!-- 背景 -->
+  <image class="page-bg" src="/images/schedule-bg.png" mode="aspectFill" />
+  <view class="bg-mask"></view>
+
+  <!-- 顶部内容 -->
+  <view class="top-content">
+    <!-- 用户信息 - 横向居中布局 -->
+    <view class="profile">
+      <image class="avatar" src="{{user.avatar}}" mode="aspectFill" />
+      <view class="profile-info">
+        <text class="user-name">{{user.name}}</text>
+        <text class="user-id">ID：{{user.id}}</text>
+      </view>
+    </view>
+
+    <!-- 标签页 -->
+    <view class="tabs">
+      <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabTap" data-tab="0">
+        <text>我的计划</text>
+      </view>
+      <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onTabTap" data-tab="1">
+        <text>联系我们</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view
+    class="content-scroll"
+    scroll-y
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <!-- 我的计划视图 -->
+    <view wx:if="{{activeTab === 0}}" class="plans-container">
+      <view class="plans-list">
+        <view
+          class="plan-card"
+          wx:for="{{plans}}"
+          wx:key="id"
+        >
+          <!-- ========== 左侧封面区 ========== -->
+          <view class="card-cover">
+            <!-- 背景图 -->
+            <image class="cover-img" src="{{item.cover}}" mode="aspectFill"></image>
+            <!-- 渐变遮罩 -->
+            <view class="cover-overlay"></view>
+
+            <!-- 金额标签 - 左上 -->
+            <view class="price-tag">
+              <text>{{item.priceLabel}}</text>
+            </view>
+
+            <!-- 锁/开锁图标 - 右上 -->
+            <view class="lock-icon">
+              <!-- 已预定 - 锁图标 -->
+              <view wx:if="{{item.status === 1}}" class="lock-wrap">
+                <view class="lock-ring"></view>
+                <view class="lock-body"></view>
+              </view>
+              <!-- 未预定 - 开锁图标 -->
+              <view wx:else class="unlock-wrap">
+                <view class="unlock-ring"></view>
+                <view class="unlock-body"></view>
+              </view>
+            </view>
+
+            <!-- 封面底部信息 -->
+            <view class="cover-bottom">
+              <!-- 标题 -->
+              <text class="cover-title">{{item.title}}</text>
+              <!-- 标签 -->
+              <view class="cover-tags">
+                <text class="tag-item" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+              </view>
+            </view>
+          </view>
+
+          <!-- ========== 右侧详情区 ========== -->
+          <view class="card-detail">
+            <view class="detail-list">
+              <view class="detail-row">
+                <text class="detail-label">创建时间:</text>
+                <text class="detail-value">{{item.createDate}}</text>
+              </view>
+              <view class="detail-row">
+                <text class="detail-label">计划日期:</text>
+                <text class="detail-value">{{item.startDate}}至{{item.endDate}}</text>
+              </view>
+              <view class="detail-row">
+                <text class="detail-label">出发地点:</text>
+                <text class="detail-value">{{item.departure}}</text>
+              </view>
+              <view class="detail-row">
+                <text class="detail-label">车辆:</text>
+                <text class="detail-value">{{item.vehicle}}</text>
+              </view>
+            </view>
+
+            <!-- 操作按钮 -->
+            <view class="card-actions">
+              <view
+                class="action-btn {{item.status === 0 ? 'primary' : 'secondary'}}"
+                bindtap="onPlanAction"
+                data-action="{{item.status === 0 ? 'modify' : 'view'}}"
+                data-id="{{item.id}}"
+                data-status="{{item.status}}"
+              >
+                <text>{{item.status === 0 ? '修改计划' : '查看计划'}}</text>
+              </view>
+              <view
+                class="action-btn {{item.status === 0 ? 'outline' : 'secondary'}}"
+                bindtap="onPlanAction"
+                data-action="{{item.status === 0 ? 'book' : 'contract'}}"
+                data-id="{{item.id}}"
+                data-status="{{item.status}}"
+              >
+                <text>{{item.status === 0 ? '立即预定' : '查看合同'}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 空状态 -->
+      <view wx:if="{{plans.length === 0}}" class="empty-state">
+        <text class="empty-text">暂无计划</text>
+      </view>
+    </view>
+
+    <!-- 联系我们视图 - 四个矢量图标按钮 -->
+    <view wx:if="{{activeTab === 1}}" class="contact-container">
+      <!-- 标题 -->
+
+      <!-- 四个图标按钮 -->
+      <view class="contact-btns">
+        <view
+          class="contact-btn"
+          wx:for="{{contactOptions}}"
+          wx:key="id"
+          bindtap="onContactTap"
+          data-option="{{item}}"
+        >
+          <view wx:if="{{item.type === 'wechat'}}" class="icon-svg">
+            <image class="icon-image" src="/images/contact-wechat.png" mode="aspectFill"></image>
+          </view>
+          <view wx:elif="{{item.type === 'xiaohongshu'}}" class="icon-svg">
+            <image class="icon-image" src="/images/contact-xiaohongshu.png" mode="aspectFill"></image>
+            </view>
+          <view wx:elif="{{item.type === 'douyin'}}" class="icon-svg">
+            <image class="icon-image" src="/images/contact-douyin.png" mode="aspectFill"></image>
+          </view>
+          <view wx:elif="{{item.type === 'phone'}}" class="icon-svg">
+            <image class="icon-image" src="/images/contact-phone.png" mode="aspectFill"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="bottom-safe"></view>
+  </scroll-view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <view
+      class="bottom-nav-item {{item.active ? 'active' : ''}}"
+      wx:for="{{bottomTabs}}"
+      wx:key="key"
+      bindtap="onBottomTabTap"
+      data-path="{{item.pagePath}}"
+    >
+      <view class="tab-icon-wrap">
+        <image class="tab-icon-base" src="{{item.iconBase}}" mode="aspectFit"/>
+        <image wx:if="{{item.iconTop}}" class="tab-icon-top" src="{{item.iconTop}}" mode="aspectFit"/>
+      </view>
+      <text class="bottom-nav-text">{{item.text}}</text>
+    </view>
+  </view>
+</view>

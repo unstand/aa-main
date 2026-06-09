@@ -1,0 +1,666 @@
+/* pages/home/home.wxss */
+@font-face {
+  font-family: "HarmonyOS Sans";
+  src: url("/ttf/HarmonyOS Sans.ttf");
+  font-family: "Alimama FangYuanTi VF";
+  src: url("/ttf/Alimama FangYuanTi VF.ttf");
+  font-family: "Alimama ShuHeiTi";
+  src: url("/ttf/Alimama_ShuHeiTi_Bold.ttf");
+}
+
+.bg-image {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+
+
+/* ===== 搜索栏 ===== */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx;
+  padding-top: calc(88rpx + env(safe-area-inset-top));
+  padding-bottom: 20rpx;
+  z-index: 10;
+    /* ❌ 删除背景 */
+    background: transparent;
+
+    /* ❌ 删除毛玻璃 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.moon-logo {
+  width: 30px;
+  height: 29px;
+  top: 8.67px;
+  transform: translateX(-36rpx);
+  z-index: 10;
+}
+.search-inner {
+  width: 177px;
+  height: 26px;
+
+  top: 8.67px;
+  left: 100px;
+
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 251, 246, 0.5);
+  border-radius: 26rpx;
+  padding: 0 24rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 22rpx;
+  color: #ffffff;
+  font-family: "HarmonyOS Sans";
+  font-weight: 300;
+  min-width: 0;
+}
+
+.search-placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 22rpx;
+}
+
+.search-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 12rpx;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.content-scroll {
+  height: calc(100vh - 100rpx);
+}
+
+.scroll-bottom-space { height: calc(150rpx + env(safe-area-inset-bottom)); }
+
+/* 区块标题 */
+.section { margin-bottom: 28rpx; }
+.section-header { padding: 16rpx 32rpx 12rpx; }
+.section-title {
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 1);
+}
+
+/* 横向滚动 */
+.plan-scroll { white-space: nowrap; }
+.plan-cards {
+  display: flex;
+  padding: 32rpx 32rpx;
+  gap: 20rpx;
+}
+
+/* 玻璃拟态计划卡片 */
+.glass-plan-card {
+  position: relative;
+  width: 620rpx;
+  min-height: 540rpx;
+  flex-shrink: 0;
+  border-radius: 32rpx;
+  overflow: hidden;
+  backdrop-filter: blur(40rpx);
+  box-sizing: border-box;
+  background: rgba(229, 229, 226, 0.58);
+  box-shadow:
+    inset 0 2rpx 8rpx rgba(255, 255, 255, 0.42),
+    0 12rpx 24rpx rgba(16, 24, 30, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.central-asia-card {
+  width: 620rpx;
+  margin: 0 32rpx;
+}
+
+.plan-card-inner {
+  display: flex;
+  align-items: stretch;
+  padding: 6rpx 4rpx;
+  gap: 16rpx;
+}
+.card-cover {
+  width: 380rpx;
+  height: 520rpx;
+  top: 6rpx;
+  left: 10rpx;
+  position: relative;
+  border-radius: 32rpx;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+ 
+
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* 渐变层 */
+.cover-img::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background:
+  linear-gradient(
+    180deg,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.08) 60%,
+    rgba(255,255,255,0.84) 100%
+  );
+}
+
+/* 金额标签 - 左上 */
+.price-tag {
+  position: absolute;
+  top: 16rpx;
+  right: 12rpx;
+  width: 136rpx;
+  height: 38rpx;
+  z-index: 4;
+  padding: 6rpx 16rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  
+  box-shadow: inset 0 1rpx 4rpx rgba(255, 255, 255, 0.42);
+  white-space: nowrap;
+   /* 毛玻璃核心 */
+   background: rgba(0, 0, 0, 0.25);
+
+   backdrop-filter: blur(20rpx);
+   -webkit-backdrop-filter: blur(20rpx);
+ 
+   /* 外阴影 */
+   box-shadow:
+     0 2rpx 8rpx rgba(0, 0, 0, 0.25),
+ 
+     /* 内阴影 */
+     inset 0 1rpx 4rpx 2rpx rgba(255, 255, 255, 0.18);
+ 
+   border: 1rpx solid rgba(255,255,255,0.12);
+}
+
+.price-tag text {
+  position: fixed;
+  margin-top: 8rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;
+line-height: 24rpx;
+letter-spacing: 0rpx;
+transform: translateY(-50%);
+transform: translateX(-50%);
+  color: rgba(255, 255, 255, 1);
+}
+
+/* 封面底部信息 */
+.cover-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16rpx;
+  z-index: 4;
+}
+
+.cover-title {
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+  
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cover-tags {
+    
+  display: flex;
+  flex-wrap: nowrap;
+  width: 94rpx;      /* 47px × 2 = 94rpx */
+  height: 28rpx; 
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+  
+}
+
+.meta-tag {
+  padding: 3rpx 10rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.4);
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(203, 202, 202, 1);
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  
+  box-shadow: inset 0 1rpx 4rpx rgba(255, 255, 255, 0.42);
+  white-space: nowrap;
+   /* 毛玻璃核心 */
+   background: rgba(0, 0, 0, 0.25);
+
+   backdrop-filter: blur(20rpx);
+   -webkit-backdrop-filter: blur(20rpx);
+ 
+   /* 外阴影 */
+   box-shadow:
+     0 2rpx 8rpx rgba(0, 0, 0, 0.25),
+ 
+     /* 内阴影 */
+     inset 0 1rpx 4rpx 2rpx rgba(255, 255, 255, 0.18);
+ 
+   border: 1rpx solid rgba(255,255,255,0.12);
+}
+/* 右侧：标签 + 描述 + 季节 */
+.plan-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 4rpx;
+}
+
+.plan-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.feature-tag {
+  height: 38rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  white-space: nowrap;
+  border: 2rpx solid rgba(255, 255, 255, 1);  /* 1px = 2rpx */
+}
+
+.feature-tag-0 {
+  background:rgba(204, 61, 61, 0.46);
+}
+
+.feature-tag-1 {
+  background: rgba(120, 190, 255, 0.35);
+  color: #e8f4ff;
+}
+
+.feature-tag-2 {
+  background:transparent;
+}
+
+.plan-desc-text {
+  margin-top: 18rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: normal;
+}
+
+/* 右下角整体 */
+.bottom-view {
+  position: absolute;
+  right: 108rpx;
+  bottom: 22rpx;
+
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+/* 头像 */
+.plan-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 14rpx;
+}
+
+/* 右侧文字 */
+.bottom-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 名字 */
+.plan-name {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255,255,255,1);
+
+}
+
+/* 日期 */
+.plan-season {
+  margin-top: 4rpx;
+
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+    color: rgba(255,255,255,1);
+}
+
+/* 中亚游底部登录浮层 */
+.login-float-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin: 0 16rpx 16rpx;
+  padding: 16rpx 20rpx;
+  border-radius: 20rpx;
+  background: rgba(20, 20, 30, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(255, 255, 255, 0.08);
+}
+
+.login-float-text {
+  flex: 1;
+  font-size: 20rpx;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+  white-space: normal;
+}
+
+.login-float-btn {
+  flex-shrink: 0;
+  padding: 10rpx 24rpx;
+  border-radius: 24rpx;
+  background: #4ecdc4;
+}
+
+.login-float-btn-text {
+  font-size: 22rpx;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.login-float-close {
+  flex-shrink: 0;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-float-close-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* DIY 定制卡片 */
+.diy-card {
+  position: relative;
+  margin: 0 32rpx;
+  height: 260rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  border: 1rpx solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, #4a6078 0%, #2a3548 100%);
+}
+
+.diy-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.diy-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background:
+  linear-gradient(
+    180deg,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.08) 60%,
+    rgba(255,255,255,0.64) 100%
+  );
+
+}
+
+.diy-row {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28rpx;
+  gap: 20rpx;
+  transform: translateY(-40rpx);
+}
+.info{
+  display: flex;
+  flex-direction: column;
+}
+.diy-desc {
+  margin-top: 20rpx;
+  flex: 1;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+  white-space: normal;
+}
+
+.diy-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 120rpx;
+  height: 48rpx;
+  padding: 12rpx 28rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.55);
+  background: transparent;
+  transform: translate(-16rpx,100rpx);
+}
+
+.diy-btn-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+display: flex;
+  justify-content: center;  /* 水平居中 */
+  align-items: center;      /* 垂直居中（可选） */
+  color: rgba(255, 255, 255, 1);
+  white-space: nowrap;
+}
+
+/* 弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 544rpx;
+  background-color: #2d2d44;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.modal-desc {
+  font-size: 28rpx;
+  color: #8e8e9a;
+  display: block;
+  margin-bottom: 32rpx;
+}
+
+.modal-btns { display: flex; gap: 16rpx; }
+.modal-cancel { flex: 1; padding: 20rpx 0; }
+.modal-confirm { flex: 1; padding: 20rpx 0; }
+
+.bottom-nav {
+  position: fixed;
+  left: 50rpx;
+  right: 50rpx;
+  bottom: calc(28rpx + env(safe-area-inset-bottom));
+  z-index: 30;
+  height: 106rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1rpx solid rgba(255, 255, 255, 0.24);
+  border-radius: 64rpx; /* 32px * 2 */
+  background: rgba(29, 45, 61, 0.12);
+  backdrop-filter: blur(40rpx);     /* 20px * 2 */
+  -webkit-backdrop-filter: blur(40rpx);
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 
+    0 4rpx 16rpx 0 rgba(0, 0, 0, 0.25),           /* 外阴影 */
+    inset 0 2rpx 8rpx 4rpx rgba(255, 255, 255, 0.18);
+}
+
+.bottom-nav-item {
+  width: 108rpx;
+  height: 86rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-icon-wrap {
+  position: relative;
+
+  width: 68rpx;
+  height: 68rpx;
+}
+
+.tab-icon-base {
+  width: 100%;
+  height: 100%;
+}
+
+.tab-icon-top {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+}
+
+.bottom-nav-text {
+  font-family: "Noto Sans SC";
+font-weight: 400; /* Regular */
+font-size: 24rpx;
+line-height: 34rpx;
+letter-spacing: 0rpx;
+text-align: center;
+  display: none;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.bottom-nav-item.active .bottom-nav-icon {
+  opacity: 1;
+}
+
+.bottom-nav-item.active .bottom-nav-text {
+  display: block;
+  color: #78f3ee;
+}

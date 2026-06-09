@@ -1,0 +1,148 @@
+·<view class="detail-page">
+  <image class="page-bg" src="/images/bj-car.png" mode="aspectFill" />
+  <view class="page-blur"></view>
+  <view class="bg-mask"></view>
+ 
+
+  <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="top-bar">
+      <view class="back-btn" bindtap="onBack">
+<!-- 矢量箭头 -->
+        <view class="back-arrow"></view>
+      </view>
+    </view>
+    <view class="glass-card hero-card">
+      <view class="hero-image-wrap">
+        <image class="hero-image" src="{{vehicle.image}}" mode="aspectFit" />
+        <view class="dou">
+                <image class="douyin" src="/images/douyin.png" mode="aspectFill" />
+              </view>
+        <view class="hero-dots">
+          <view class="hero-dot {{item === activeSlide ? 'active' : ''}}" wx:for="{{carouselDots}}" wx:key="*this"></view>
+        </view>
+      </view>
+
+      <view class="vehicle-summary">
+        <view class="title-row">
+          <text class="vehicle-name">{{vehicle.name}}</text>
+          <text class="vehicle-year">{{vehicle.year}}</text>
+        </view>
+        <text class="vehicle-items">{{vehicle.specs}}</text>
+      </view>
+
+      <view class="booking-row">
+        <view class="quantity-box">
+          <text class="quantity-label1">数量</text>
+          <view class="quantity-action {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">-</view>
+          <text class="quantity-value">{{quantity}}</text>
+          <view class="quantity-action" bindtap="onQuantityPlus">+</view>
+        </view>
+        <text class="price-text">¥{{vehicle.price}}/车/日</text>
+      </view>
+
+      <view class="date-panel">
+        <view class="date-col">
+          <view class="date-main-row">
+            <text class="date-main">{{startDateText}}</text>
+            <image class="date-arrow" src="/images/sanjiao.png" mode="aspectFill" />
+          </view>
+          <text class="date-sub">{{startWeekday}} {{startTime}}</text>
+        </view>
+        <view class="date-center">共 {{totalDays}} 日</view>
+        <view class="date-col date-col-right">
+          <view class="date-main-row">
+            <text class="date-main">{{endDateText}}</text>
+            <image class="date-arrow" src="/images/sanjiao.png" mode="aspectFill" />
+          </view>
+          <text class="date-sub">{{endWeekday}} {{endTime}}</text>
+        </view>
+      </view>
+
+      <view class="location-grid">
+        <view class="city-card">
+          <text class="location-label">城市</text>
+          <text class="location-value">{{city}}</text>
+        </view>
+        <view class="location-card location-card-wide">
+          <text class="location-label">取车点</text>
+          <text class="location-value">{{pickupPoint}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="info-card">
+      <view class="section-head">
+        <text class="section-title">驾驶员信息</text>
+        <view class="section-link" bindtap="onViewAllDrivers">
+          <text class="section-link-text">全部驾驶员</text>
+          <image class="section-link-arrow" src="/images/sanjiao-.png" mode="aspectFill" />
+        </view>
+      </view>
+
+      <view class="add-driver" bindtap="onAddDriver">
+        <text class="add-driver-icon">⊕</text>
+        <text class="add-driver-text">点击新增驾驶员</text>
+      </view>
+
+      <view class="material-row">
+        <text class="material-title">取车材料</text>
+        <view class="material-divider"></view>
+        <view class="material-list">
+          <text class="material-item">1.驾驶员本人有效身份证原件</text>
+          <text class="material-item">2.驾驶证原件(支持12123电子驾照)，驾龄1年以上</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="insurance-card">
+      <view class="section-head insurance-head">
+        <view class="insurance-head-left">
+          <text class="section-title">车辆保障</text>
+          <text class="insurance-provider">太平洋车险提供保障</text>
+        </view>
+        <view class="section-link" bindtap="onViewInsuranceDetail">
+          <text class="section-link-text">保障说明</text>
+          <image class="section-link-arrow" src="/images/sanjiao-.png" mode="aspectFill" />
+        </view>
+      </view>
+
+      <view class="insurance-table">
+        <view class="insurance-label-col">
+          <view class="table-head-spacer">保障项目</view>
+          <view class="label-cell" wx:for="{{insuranceRows}}" wx:key="key">{{item.label}}</view>
+        </view>
+
+        <view class="insurance-plan-col {{selectedInsurance === item.id ? 'selected' : ''}}" wx:for="{{insurancePlans}}" wx:key="id">
+          <view class="plan-head" bindtap="onSelectInsurance" data-id="{{item.id}}">
+            <text class="plan-name">{{item.name}}</text>
+            <image class="section-link-arrow" src="/images/sanjiao-.png" mode="aspectFill" />
+          </view>
+          <view class="plan-cell" wx:for="{{insuranceRows}}" wx:for-item="row" wx:key="key">
+            <text class="plan-cell-text">{{item.features[row.key].main}}</text>
+            <text wx:if="{{item.features[row.key].sub}}" class="sub-text">{{item.features[row.key].sub}}
+            </text>
+          </view>
+          <view class="plan-select {{selectedInsurance === item.id ? 'active' : ''}}" bindtap="onSelectInsurance" data-id="{{item.id}}">
+            <text class="plan-select-text">{{selectedInsurance === item.id ? item.selectedText : '选择'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view class="total-box">
+      <text class="total-label">总价：</text>
+      <text class="total-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="action-btn contact-btn" bindtap="onContactUs">联系我们</view>
+    <view class="action-btn primary-btn" bindtap="onGeneratePlan">
+      <text class="primary-free">free</text>
+      <text class="primary-text">生成计划</text>
+    </view>
+  </view>
+
+  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
+</view>

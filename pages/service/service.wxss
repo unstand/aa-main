@@ -1,0 +1,479 @@
+@font-face {
+  font-family: "YOUSHEhaoshenti";
+  src: url("C:\Users\lkx57\Desktop\aa-main\ttf\YOUSHEhaoshenti.ttf");
+}
+
+@font-face {
+  font-family: "Alimama FangYuanTi VF";
+  src: url("C:\Users\lkx57\Desktop\aa-main\ttf\AlimamaFangYuanTiVF.ttf");
+}
+.dou{
+  position:absolute;
+  top: 12rpx;
+  right: 12rpx;
+  display: block;
+  text-align: right;
+  border-radius: 40%;
+  width: 50rpx;
+  height: 50rpx;
+  background-color: rgba(147, 238, 238, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.douyin{
+  width: 21rpx;
+  height: 23.5rpx;
+  display: block;
+}
+.service-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+.page-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.76;
+  z-index: 0;
+}
+
+.bg-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(11, 12, 16, 0.58) 0%, rgba(13, 13, 15, 0.2) 48%, rgba(26, 22, 20, 0.22) 100%),
+    rgba(17, 21, 27, 0.22);
+}
+/* ===== 搜索栏 ===== */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 40rpx;
+  padding-top: calc(88rpx + env(safe-area-inset-top));
+  padding-bottom: 20rpx;
+  z-index: 10;
+    /* ❌ 删除背景 */
+    background: transparent;
+
+    /* ❌ 删除毛玻璃 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.search-inner {
+  width: 177px;
+  height: 26px;
+
+  top: 8.67px;
+  left: 100px;
+
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 251, 246, 0.5);
+  border-radius: 26rpx;
+  padding: 0 24rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 22rpx;
+  color: #ffffff;
+  font-family: "HarmonyOS Sans";
+  font-weight: 300;
+  min-width: 0;
+}
+
+.search-placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 22rpx;
+}
+
+.search-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 12rpx;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.main-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 180rpx);
+}
+
+.category-sidebar {
+  position: relative;
+  width: 138rpx;
+  height: 100vh;
+
+  background:transparent;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding-top: 34rpx;
+
+  overflow-y: auto;
+}
+.category-sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 1rpx;
+  height: 75%;
+
+  background: rgba(255, 255, 255, 0.2);
+}
+/* 分类项 */
+
+.category-item {
+  position: relative;
+  
+  width: 100%;
+  height: 168rpx; 
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  transition: all 0.25s ease;
+  border-radius: 12rpx;
+}
+
+.category-item.active {
+  background: transparent;
+}
+.category-item.active::after { 
+  position: absolute;
+  content: ""; 
+  top: 100rpx !important; 
+  left: 50%; 
+  transform:translateX(-50%); 
+   width: 42rpx; 
+   height: 4rpx; 
+   border-radius: 999rpx; 
+   background: linear-gradient( 90deg, #00d4ff 0%, #009dff 100% ); 
+   box-shadow: 0 0 8rpx rgba(0, 212, 255, 0.8), 0 0 16rpx rgba(0, 212, 255, 0.45); 
+  }
+
+/* 服务名称 */
+.category-item .sideservice-name {
+  width: 84rpx;              /* 控制换行宽度（关键） */
+  max-width: 84rpx;
+
+  font-size: 28rpx;
+  line-height: 36rpx;
+
+  color: #fff;
+  text-align: center;
+
+  white-space: normal;      /* 允许换行 */
+
+  display: -webkit-box;     /* 两行核心 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+
+  word-break: break-all;    /* 强制拆字换行 */
+}
+
+/* 价格 */
+.category-item .sideservice-price {
+  margin-top: 8rpx ;
+
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 400;
+
+  font-size: 20rpx !important;
+  line-height: 24rpx;
+  width: 100%;
+  display: block;
+  color: rgba(255, 251, 246, 0.5) !important;
+
+  text-align: center;
+}
+
+
+.service-list {
+  flex: 1;
+  height: 100%;
+  padding: 0 22rpx 0 16rpx;
+  box-sizing: border-box;
+}
+
+.service-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 280rpx;
+  margin-bottom: 24rpx;
+  padding: 16rpx 18rpx;
+  box-sizing: border-box;
+  border-radius: 18rpx;
+  background: rgba(229, 229, 226, 0.58);
+  box-shadow:
+    inset 0 2rpx 8rpx rgba(255, 255, 255, 0.42),
+    0 12rpx 24rpx rgba(16, 24, 30, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+
+.service-photo-wrap {
+  width: 208rpx;        /* 104px * 2 */
+  height: 208rpx;       /* 104px * 2 */
+  position: relative;
+  margin-top: 18rpx;           /* 9px * 2 */
+  margin-left: 22rpx;          /* 11px * 2 */
+  border-radius: 24rpx; /* 12px * 2 */
+  background: transparent;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #f6f6f6;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
+}
+.car-photo {
+  width: 100%;
+  height: 100%;
+}
+
+.service-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+  margin-bottom: 4rpx;
+}
+
+.title-wrap {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.service-name {
+  max-width: 290rpx;        /* 145px * 2 */
+  height: 28rpx;        /* 14px * 2 */
+  position: relative;
+  top: 18rpx;           /* 17px * 2 */
+  left: 14rpx;         /* 122px * 2 */
+  background: transparent;
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 500;
+  font-size: 28rpx;     /* 14px * 2 */
+  line-height: 34rpx;   /* 17px * 2 */
+  letter-spacing: 0px;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 1);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.service-edition {
+  position: relative;
+  max-width: 182rpx;        /* 91px * 2 */
+  height: 28rpx;        /* 14px * 2 */
+  top: 18rpx;           /* 17px * 2 */
+  left: 14rpx;         /* 195px * 2 */
+  background: transparent;
+  color: rgba(17, 34, 52, 0.67);
+  font-family: "Noto Sans SC";
+  font-weight: 400;
+  font-size: 24rpx;     /* 12px * 2 */
+  line-height: 34rpx;   /* 17px * 2 */
+  letter-spacing: 0px;
+  text-align: left;
+  display: block;
+  white-space: nowrap;
+}
+
+.video-badge {
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 8rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #80fbff;
+  box-shadow: 0 3rpx 10rpx rgba(42, 226, 232, 0.36);
+}
+
+.video-icon {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  font-weight: 800;
+  color: #06161a;
+}
+
+.service-items {
+  max-width: 378rpx;        /* 189px * 2 */
+  min-height: 50rpx;        /* 25px * 2 */
+  position: relative;
+  top: 20rpx;          /* 57px * 2 */
+  left: 14rpx;         /* 122px * 2 */
+  background: transparent;
+  color: rgba(17, 34, 52, 0.67);
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 400;
+  font-size: 20rpx;     /* 10px * 2 */
+  line-height: 24rpx;   /* 12px * 2 */
+  letter-spacing: 0px;
+  text-align: left;
+  display: block;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.service-dimensions {
+  max-width: 422rpx;        /* 211px * 2 */
+  height: 28rpx;        /* 14px * 2 */
+  position: relative;
+  top: 40rpx;           /* 38.5px * 2 */
+  left: 14rpx;         /* 122px * 2 */
+  background: transparent;
+  color: rgba(17, 34, 52, 0.67);
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 400;
+  font-size: 20rpx;     /* 10px * 2 */
+  line-height: 24rpx;   /* 12px * 2 */
+  letter-spacing: 0px;
+  text-align: left;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-price {
+  align-self: flex-end; 
+  right: 32rpx;
+  margin-top: 90rpx;
+  flex-shrink: 0;
+  font-family: "Alimama FangYuanTi VF";
+  font-weight: 700;
+  font-size: 36rpx;     /* 18px * 2 */
+  line-height: 44rpx;   /* 22px * 2 */
+  letter-spacing: 0px;
+  text-align: right;
+  color: rgba(17, 34, 52, 0.67);
+  letter-spacing: 0;
+  transform: translateX(-20rpx);
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.list-bottom-space {
+  height: 42rpx;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50rpx;
+  right: 50rpx;
+  bottom: calc(28rpx + env(safe-area-inset-bottom));
+  z-index: 30;
+  height: 106rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1rpx solid rgba(255, 255, 255, 0.24);
+  border-radius: 64rpx; /* 32px * 2 */
+  background: rgba(29, 45, 61, 0.12);
+  backdrop-filter: blur(40rpx);     /* 20px * 2 */
+  -webkit-backdrop-filter: blur(40rpx);
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 
+    0 4rpx 16rpx 0 rgba(0, 0, 0, 0.25),           /* 外阴影 */
+    inset 0 2rpx 8rpx 4rpx rgba(255, 255, 255, 0.18);
+}
+
+.bottom-nav-item {
+  width: 108rpx;
+  height: 86rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-icon-wrap {
+  position: relative;
+
+  width: 68rpx;
+  height: 68rpx;
+}
+
+.tab-icon-base {
+  width: 100%;
+  height: 100%;
+}
+
+.tab-icon-top {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+}
+.bottom-nav-text {
+  font-family: "Noto Sans SC";
+font-weight: 400; /* Regular */
+font-size: 24rpx;
+line-height: 34rpx;
+letter-spacing: 0rpx;
+text-align: center;
+  display: none;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.bottom-nav-item.active .bottom-nav-icon {
+  opacity: 1;
+}
+
+.bottom-nav-item.active .bottom-nav-text {
+  display: block;
+  color: #78f3ee;
+}

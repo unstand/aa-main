@@ -1,0 +1,885 @@
+
+.dou{
+  position:absolute;
+  top: 12rpx;
+  right: 12rpx;
+  display: block;
+  text-align: right;
+  border-radius: 40%;
+  width: 50rpx;
+  height: 50rpx;
+  background-color: rgba(147, 238, 238, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.douyin{
+  width: 21rpx;
+  height: 23.5rpx;
+  display: block;
+}
+.detail-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background-color: transparent;
+}
+.page-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.76;
+  z-index: 0;
+}
+
+.bg-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(11, 12, 16, 0.58) 0%, rgba(13, 13, 15, 0.2) 48%, rgba(26, 22, 20, 0.22) 100%),
+    rgba(17, 21, 27, 0.22);
+}
+
+
+
+.content-scroll {
+  position: relative;
+  z-index: 2;
+  height: calc(100vh - 162rpx);
+  padding: 22rpx 30rpx 0;
+  box-sizing: border-box;
+}
+.top-bar {
+  position: relative;
+  display: flex;
+  padding-top: calc(40rpx + env(safe-area-inset-top));
+  padding-bottom: 20rpx;
+  z-index: 10;
+    /* ❌ 删除背景 */
+    background: transparent;
+
+    /* ❌ 删除毛玻璃 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.back-btn {
+  position: relative;
+
+  width: 64rpx;
+  height: 64rpx;
+
+  border-radius: 16rpx;
+  z-index: 9999;
+ background-color: rgba(17, 34, 52, 0.67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-arrow {
+  width: 20rpx;
+  height: 20rpx;
+
+  border-left: 4rpx solid rgba(203, 202, 202, 1);
+  border-bottom: 4rpx solid rgba(203, 202, 202, 1);
+
+  transform: rotate(45deg);
+
+  margin-left: 8rpx;
+}
+
+.glass-card {
+  background: rgba(247, 241, 237, 0.74);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 32rpx;
+  flex: 1;
+  min-height: 800rpx;
+  box-shadow:
+    0 18rpx 42rpx rgba(7, 12, 20, 0.18),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.36);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.hero-card {
+  padding: 18rpx 18rpx 20rpx;
+}
+
+.hero-image-wrap {
+  position: relative;
+  height: 340rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  background:transparent;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.18);
+}
+
+.media-badge {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background: #97eef1;
+  color: #111214;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.hero-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.hero-dot.active {
+  background: #ffffff;
+}
+
+.vehicle-summary {
+  padding: 36rpx 20rpx 0;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.vehicle-name {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 36rpx;    /* 18px × 2 = 36rpx */
+line-height: 44rpx;  /* 22px × 2 = 44rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.vehicle-year {
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.vehicle-items {
+  display: block;
+  margin-top: 16rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.booking-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 0 14rpx;
+}
+
+.quantity-box {
+  width: 316rpx;
+  height: 64rpx;
+  padding: 0 18rpx;
+  gap: 6rpx;
+  border-radius: 24rpx;
+  background: rgba(29, 45, 61, 0.12);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.quantity-label {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: rgba(17, 34, 52, 0.67);
+  margin-left: 24rpx;
+}
+
+.quantity-action {
+  width: 48rpx;
+  height: 48rpx;
+  padding-left: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 38rpx;
+  line-height: 1;
+
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.quantity-action.disabled {
+  opacity: 0.35;
+}
+
+.quantity-value {
+  width: 60rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 28rpx;    /* 14px × 2 = 28rpx */
+  line-height: 34rpx;  /* 17px × 2 = 34rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+
+  flex: none; /* 👈关键 */
+}
+
+.price-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 36rpx;    /* 18px × 2 = 36rpx */
+line-height: 44rpx;  /* 22px × 2 = 44rpx */
+letter-spacing: 0rpx;
+text-align: right;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.date-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 24rpx;
+  background: rgba(29, 45, 61, 0.12);
+}
+
+.date-col {
+  min-width: 176rpx;
+}
+
+.date-col-right {
+  text-align: right;
+}
+
+.date-main-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.date-col-right .date-main-row {
+  justify-content: flex-end;
+}
+.date-col-right .date-sub {
+  text-align: right;
+  padding-right: 48rpx;
+}
+
+.date-main {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(0, 0, 0, 1);
+}
+
+.date-arrow {
+  width: 32rpx;           /* 16px × 2 = 32rpx */
+height: 32rpx;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.date-sub {
+  padding-top: 16rpx;
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color:rgba(17, 34, 52, 0.67);
+}
+
+.date-center {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.location-grid {
+  display: flex;
+  flex: 1;
+  gap: 14rpx;
+  margin-top: 16rpx;
+}
+
+
+.city-card {
+  border-radius: 22rpx;
+  height: 100%;
+  background: rgba(29, 45, 61, 0.12);
+  padding: 18rpx 22rpx;
+  box-sizing: border-box;
+  width: 160rpx;
+}
+
+.location-card-wide {
+  flex: 1;
+  border-radius: 22rpx;
+  height: 100%;
+  background: rgba(29, 45, 61, 0.12);
+  padding: 18rpx 22rpx;
+  box-sizing: border-box;
+}
+
+.location-label {
+  display: block;
+  padding-top:10rpx ;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.location-value {
+  display: block;
+  padding-top: 12rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+
+
+.info-card{
+  position: relative;
+  margin-top: 32rpx;
+  background: rgba(247, 241, 237, 0.74);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 32rpx;
+  flex: 1;
+  min-height: 228rpx;
+  box-shadow:
+    0 18rpx 42rpx rgba(7, 12, 20, 0.18),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.36);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  padding: 26rpx 24rpx 22rpx;
+  margin-bottom: 28rpx;
+}
+.insurance-card {
+  position: relative;
+  padding-top: 16rpx;
+  background: rgba(247, 241, 237, 0.74);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 32rpx;
+  flex: 1;
+  min-height: 800rpx;
+  box-shadow:
+    0 18rpx 42rpx rgba(7, 12, 20, 0.18),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.36);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  padding: 26rpx 24rpx 22rpx;
+  margin-bottom: 28rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+
+.section-link {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.section-link-text {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  text-align: right;
+  color: rgba(17, 34, 52, 0.67);
+}
+.section-link-arrow{
+  width: 10rpx;        
+  height: 20rpx;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.add-driver {
+  height: 80rpx;
+  margin: 44rpx 0;
+  border-radius: 24rpx;
+  background:rgba(29, 45, 61, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.add-driver-icon,
+.add-driver-text {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(17, 34, 52, 0.67) ;
+}
+
+.material-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: -18rpx;
+}
+
+.material-title {
+  width: 56rpx;
+  margin-left: 24rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.material-divider {
+  position: relative;
+  width: 2rpx;
+  left:18rpx ;
+  height: 74rpx;
+  background: rgba(87, 100, 119, 0.5);
+  margin: 4rpx 18rpx 0 6rpx;
+}
+
+.material-list {
+  position: relative;
+  left:18rpx ;
+  flex: 1;
+}
+
+.material-item {
+  display: block;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.insurance-head {
+  margin-bottom: 22rpx;
+}
+
+.insurance-head-left {
+  display: flex;
+  align-items: baseline;
+}
+
+.insurance-provider {
+  margin-left: 6rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.insurance-table {
+  display: flex;
+  height: 780rpx; /* 左右统一 */
+  border-radius: 24rpx;
+  background:rgba(29, 45, 61, 0.12);
+  overflow: hidden;
+}
+.insurance-label-col {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  flex: 1;
+  padding: 18rpx 0 18rpx 16rpx;
+  box-sizing: border-box;
+}
+
+.table-head-spacer {
+  position: relative;
+  top: -28rpx;
+  height: 78rpx;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+  display: flex;
+  align-items: center;
+}
+
+.label-cell {
+  position: relative;
+  top: 16rpx; /* 👈整体下移 */
+
+  min-height: 128rpx;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.insurance-plan-col {
+  flex: 1;
+  position: relative;
+  height: 764rpx; /* 左右统一 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180rpx;
+  border-left: 1rpx solid rgba(84, 97, 116, 0.14);
+  box-sizing: border-box;
+  flex-direction: column;
+  text-align: center;
+}
+
+.insurance-plan-col.selected {
+  border: 2rpx solid #89f3f5;
+  border-radius: 24rpx;
+  margin: 4rpx 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.plan-head {
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rpx;
+}
+
+.plan-name {
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.plan-arrow {
+  font-size: 20rpx;
+  color: #556376;
+}
+
+.plan-cell {
+  min-height: 128rpx;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rpx;
+  text-align: center;
+}
+
+.plan-cell-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 22rpx;   /* 1px × 2 = 2rpx */
+letter-spacing: 0rpx;
+text-align: center;
+  color: rgba(17, 34, 52, 0.67);
+}
+.sub-text{
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 22rpx;   /* 1px × 2 = 2rpx */
+letter-spacing: 0rpx;
+text-align: center;
+  color: rgba(255, 251, 246, 0.5);
+}
+.insurance-plan-col.selected .plan-name,
+.insurance-plan-col.selected .plan-arrow,
+.insurance-plan-col.selected .plan-cell-text {
+  color: #546273;
+}
+
+.plan-select {
+  width: 122rpx;
+  height: 48rpx;
+  margin: 8rpx auto 0;
+  border-radius: 24rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-select.active {
+  border-color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.plan-select-text {
+  font-size: 20rpx;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.bottom-space {
+  height: 180rpx;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 30rpx;
+  right: 30rpx;
+  bottom: 42rpx;
+
+  height: 120rpx;
+  z-index: 9999;
+
+  padding: 10rpx;
+  border-radius: 32rpx;
+
+  background: rgba(29, 45, 61, 0.12);
+  backdrop-filter: blur(40rpx);  /* 20px × 2 = 40rpx */
+
+/* 外阴影 + 内阴影 */
+box-shadow: 
+  0 4rpx 16rpx 0 rgba(0, 0, 0, 0.25),      /* Y:2px→4rpx, 模糊:8px→16rpx */
+  inset 0 2rpx 8rpx 4rpx rgba(255, 255, 255, 0.18);  
+  border: 2rpx solid rgba(255,255,255,1);
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.total-box {
+  width: 190rpx;
+  height: 100%;
+  padding-left: 18rpx;
+  border-radius: 24rpx;
+  background: rgba(18, 26, 39, 0.96);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.total-label{
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 0;      /* 0px → 0，line-height 为 0 时可能影响文字显示，建议使用正常值 */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(147, 238, 238, 1);
+}
+.total-value {
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 28rpx;    /* 12px × 2 = 24rpx */
+line-height: 0;      /* 0px → 0，line-height 为 0 时可能影响文字显示，建议使用正常值 */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(147, 238, 238, 1);
+}
+
+.action-btn {
+  height: 100%;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.contact-btn {
+  width: 162rpx;
+  margin-left: 12rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-btn {
+  flex: 1;
+  margin-left: 12rpx;
+  gap: 8rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-free {
+  font-style: italic;
+  font-weight: 400; /* Regular */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 2rpx;   /* 1px × 2 = 2rpx */
+letter-spacing: 0rpx;
+text-align: center;
+color: rgba(0, 0, 0, 1);
+}
+
+.primary-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 2rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: center;
+color: rgba(0, 0, 0, 1);
+}
+
+.contact-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgba(9, 15, 24, 0.18);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 18rpx 18rpx;
+  box-sizing: border-box;
+}
+
+.contact-sheet {
+  width: 100%;
+  max-width: 574rpx;
+  min-height: 294rpx;
+  padding: 28rpx 20rpx 20rpx;
+  border-radius: 26rpx;
+  background:
+    linear-gradient(180deg, rgba(134, 143, 152, 0.34), rgba(110, 119, 128, 0.28)),
+    rgba(98, 108, 118, 0.22);
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 18rpx 42rpx rgba(8, 14, 22, 0.24),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.16);
+}
+
+.contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 54rpx;
+  margin-top: 8rpx;
+  margin-bottom: 34rpx;
+}
+
+.contact-icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.contact-icon-image {
+  display: block;
+}
+
+.contact-icon-wechat,
+.contact-icon-douyin {
+  width: 62rpx;
+  height: 62rpx;
+}
+
+.contact-icon-xiaohongshu {
+  width: 70rpx;
+  height: 44rpx;
+}
+
+.contact-phone {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.contact-phone-image {
+  width: 58rpx;
+  height: 58rpx;
+  display: block;
+}
+
+.contact-cancel {
+  width: 492rpx;
+  max-width: 100%;
+  height: 44rpx;
+  margin: 0 auto;
+  border-radius: 14rpx;
+  background: #8ceef0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111214;
+  font-size: 20rpx;
+  font-weight: 700;
+}

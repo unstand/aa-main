@@ -1,0 +1,206 @@
+page {
+  height: 100%;
+}
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景 */
+.bg-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* 深色蒙层 */
+.mask {
+  position: absolute;
+
+  width: 430px;
+  height: 903px;
+
+  top: -33.33px;
+  left: -20px;
+
+  background: rgba(17, 34, 52, 0.67);
+
+  backdrop-filter: blur(22px);
+
+  box-shadow:
+    inset 0 1px 4px 2px rgba(255, 255, 255, 0.18),
+    0 2px 8px 0 rgba(0, 0, 0, 0.25);
+
+  z-index: 10;
+}
+
+/* 中间区域 */
+.content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 月亮logo */
+.moon-logo {
+  position: absolute;
+  width: 153px;
+  height: 148px;
+  top: 164px;
+  left: 116px;
+  mix-blend-mode: normal;
+}
+
+/* 标语 */
+.slogan {
+  position: absolute;
+  width: 191px;
+  height: 23px;
+  top: 328px;
+  left: 100px;
+
+  /* 背景/颜色 */
+  color: rgba(255, 255, 255, 1);
+
+  /* 字体 */
+  font-family: "YOUSHEhaoshenti";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0px;
+
+  /* 对齐 */
+  text-align: center;
+
+  /* 图层模式：穿透 */
+  pointer-events: none;
+}
+.back-btn {
+  position: absolute;
+
+  width: 64rpx;
+  height: 64rpx;
+
+  top: 100rpx;
+  left: 48rpx;
+  border-radius: 16rpx;
+  z-index: 9999;
+ background-color: rgba(17, 34, 52, 0.67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-arrow {
+  width: 20rpx;
+  height: 20rpx;
+
+  border-left: 4rpx solid rgba(203, 202, 202, 1);
+  border-bottom: 4rpx solid rgba(203, 202, 202, 1);
+
+  transform: rotate(45deg);
+
+  margin-left: 8rpx;
+}
+/* 登录按钮 */
+.wechat-btn {
+  width: 190px;
+  height: 50px;
+
+  position: absolute;
+  top: 554px;
+  left: 101px;
+
+  border-radius: 30px;
+  border: none;
+
+  /* 背景自己按设计稿改 */
+  background: rgba(147, 238, 238, 1);
+  
+
+  /* 字体 */
+  font-family: 'Alimama FangYuanTi VF';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 1);
+  /* 文字绝对居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 防止文字换行 */
+  white-space: nowrap;
+
+  padding: 0;
+  margin: 0;
+}
+
+.wechat-btn::after {
+  border: none;
+}
+
+/* 底部协议 */
+/* 容器 */
+.agreement-box {
+  position: absolute;
+
+  width: 243px;
+  height: 24px;
+
+  top: 738.5px;
+  left: 74px;
+  background-color:rgba(203, 202, 202, 1);
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+
+  z-index: 20;
+  
+}
+
+/* 复选框 */
+.agreement-box checkbox {
+  position: absolute;
+  transform: scale(0.75);
+  top: 0px;
+  left: 19px;
+
+  border-radius: 4px;
+}
+
+/* 文字 */
+.agreement-text {
+  position: absolute;
+
+  top: -5.5px;
+  left: 50px;
+
+  /* 字体 */
+  font-family: 'Alimama FangYuanTi VF';
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0;
+
+  /* 左对齐 */
+  text-align: left;
+
+  color: rgba(0,0,0,1);
+
+  /* 保持一行 */
+  white-space: nowrap;
+}
+
+/* 协议文字 */
+.link {
+  color: #ffffff;
+}

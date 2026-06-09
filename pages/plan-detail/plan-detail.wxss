@@ -1,0 +1,1037 @@
+/* pages/plan-detail/plan-detail.wxss */
+.detail-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background-color: transparent;
+}
+.page-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.76;
+  z-index: 0;
+}
+
+.bg-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(11, 12, 16, 0.58) 0%, rgba(13, 13, 15, 0.2) 48%, rgba(26, 22, 20, 0.22) 100%),
+    rgba(17, 21, 27, 0.22);
+}
+
+
+
+.content-scroll {
+  position: relative;
+  z-index: 2;
+  height: calc(100vh - 162rpx);
+  padding: 22rpx 30rpx 0;
+  box-sizing: border-box;
+}
+
+
+.loading-wrap,
+.error-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+}
+
+.loading-text,
+.error-text {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.retry-btn {
+  padding: 16rpx 40rpx;
+  border-radius: 999rpx;
+  background: #4ecdc4;
+  color: #ffffff;
+  font-size: 26rpx;
+}
+.top-bar {
+  position: relative;
+  display: flex;
+  padding-top: calc(80rpx + env(safe-area-inset-top));
+  padding-bottom: 20rpx;
+  z-index: 10;
+    /* ❌ 删除背景 */
+    background: transparent;
+
+    /* ❌ 删除毛玻璃 */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.back-btn {
+  position: relative;
+
+  width: 64rpx;
+  height: 64rpx;
+
+  border-radius: 16rpx;
+  z-index: 9999;
+ background-color: rgba(17, 34, 52, 0.67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-arrow {
+  width: 20rpx;
+  height: 20rpx;
+
+  border-left: 4rpx solid rgba(203, 202, 202, 1);
+  border-bottom: 4rpx solid rgba(203, 202, 202, 1);
+
+  transform: rotate(45deg);
+
+  margin-left: 8rpx;
+}
+/* 1. 顶部滑动图片 */
+.hero-swiper-section {
+  padding: -16rpx 0 16rpx;
+}
+
+.hero-swiper {
+  height: 620rpx;
+}
+
+.hero-swiper-item {
+  padding: 0 12rpx;
+  height: 100%;
+  border-radius: 32rpx;
+  box-sizing: border-box;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 28rpx;
+}
+
+.hero-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12rpx;
+  margin-top: -16rpx;
+}
+
+.hero-dot {
+  width: 12rpx;
+  height: 12rpx;
+  z-index: 20;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.hero-dot-active {
+  background: #4ecdc4;
+}
+
+/* 2. 标题描述 */
+.intro-section {
+  padding: 24rpx 0rpx 24rpx;
+}
+
+.intro-title {
+  display: block;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 40rpx;    /* 20px × 2 = 40rpx */
+line-height: 58rpx;  /* 29px × 2 = 58rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 16rpx;
+}
+
+.intro-line {
+  display: block;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 24rpx;      /* 0px → 0 */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 8rpx;
+}
+
+/* 3. 预订卡片 */
+.booking-card {
+  margin: 12rpx 0rpx 24rpx;
+  padding: 24rpx;
+  background: rgba(247, 241, 237, 0.74);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 32rpx;
+  flex: 1;
+  box-shadow:
+    0 18rpx 42rpx rgba(7, 12, 20, 0.18),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.36);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.booking-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rpx 0 14rpx;
+}
+
+.quantity-box {
+  
+  width: 316rpx;
+  height: 64rpx;
+  padding: 0rpx 18rpx;
+  gap: 6rpx;
+  border-radius: 24rpx;
+  background: rgba(29, 45, 61, 0.12);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.quantity-label {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: rgba(17, 34, 52, 0.67);
+  margin-left: 24rpx;
+  white-space: nowrap;
+}
+.quantity-label1 {
+  flex: 1;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400;
+  font-size: 20rpx !important;
+  line-height: 24rpx;
+  color: rgba(17, 34, 52, 0.67);
+  margin-left: 24rpx;
+}
+.quantity-action {
+  width: 48rpx;
+  height: 48rpx;
+  padding-left: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 38rpx;
+  line-height: 1;
+
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.quantity-action.disabled {
+  opacity: 0.35;
+}
+
+.quantity-value {
+  width: 60rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 28rpx;    /* 14px × 2 = 28rpx */
+  line-height: 34rpx;  /* 17px × 2 = 34rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+
+  flex: none; /* 👈关键 */
+}
+
+.price-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 36rpx;    /* 18px × 2 = 36rpx */
+line-height: 44rpx;  /* 22px × 2 = 44rpx */
+letter-spacing: 0rpx;
+text-align: right;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.date-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 24rpx;
+  background: rgba(29, 45, 61, 0.12);
+}
+
+.date-col {
+  min-width: 176rpx;
+}
+
+.date-col-right {
+  text-align: right;
+}
+
+.date-main-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.date-col-right .date-main-row {
+  justify-content: flex-end;
+}
+.date-col-right .date-sub {
+  text-align: right;
+  padding-right: 48rpx;
+}
+
+.date-main {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(0, 0, 0, 1);
+}
+
+.date-arrow {
+  width: 32rpx;           /* 16px × 2 = 32rpx */
+height: 32rpx;
+color: rgba(17, 34, 52, 0.67);
+}
+
+.date-sub {
+  padding-top: 16rpx;
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color:rgba(17, 34, 52, 0.67);
+}
+
+.date-center {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.location-grid {
+  display: flex;
+  flex: 1;
+  gap: 14rpx;
+  margin-top: 16rpx;
+}
+
+
+.city-card {
+  border-radius: 22rpx;
+  height: 100%;
+  background: rgba(29, 45, 61, 0.12);
+  padding: 18rpx 22rpx;
+  box-sizing: border-box;
+  width: 160rpx;
+}
+
+.location-card-wide {
+  flex: 1;
+  border-radius: 22rpx;
+  height: 100%;
+  background: rgba(29, 45, 61, 0.12);
+  padding: 18rpx 22rpx;
+  box-sizing: border-box;
+}
+
+.location-label {
+  display: block;
+  padding-top:10rpx ;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.location-value {
+  display: block;
+  padding-top: 12rpx;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+
+
+/* 4. 地图 */
+.map-section {
+  position: relative;
+  margin: 0 0rpx 24rpx;
+  height: 272rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.map-image {
+  width: 100%;
+  height: 100%;
+}
+
+.map-pin {
+  position: absolute;
+  top: 30rpx;
+  right: 40rpx;
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-pin-icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* 5/6. 车辆与服务卡片 */
+.resource-card {
+  margin: 12rpx 0rpx 24rpx;
+  padding: 24rpx;
+  background: rgba(247, 241, 237, 0.74);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  border-radius: 32rpx;
+  flex: 1;
+  box-shadow:
+    0 18rpx 42rpx rgba(7, 12, 20, 0.18),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.36);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.resource-title{
+display: flex;
+flex-direction: row;
+margin-bottom: 8rpx;
+}
+.resource-name {
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 500; /* Medium */
+  font-size: 28rpx;    /* 14px × 2 = 28rpx */
+  line-height: 34rpx;  /* 17px × 2 = 34rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+.resource-year {
+  display: block;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+padding-left: 12rpx;
+  color: rgba(17, 34, 52, 0.67);
+}
+.dou{
+  position:absolute;
+  top: 12rpx;
+  right: 12rpx;
+  display: block;
+  text-align: right;
+  border-radius: 40%;
+  width: 50rpx;
+  height: 50rpx;
+  background-color: rgba(147, 238, 238, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.douyin{
+  width: 21rpx;
+  height: 23.5rpx;
+  display: block;
+}
+.resource-specs,
+.resource-features {
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+  margin-bottom: 4rpx;
+}
+
+.resource-action-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin: 12rpx 0;
+}
+
+.resource-price {
+  flex: 1;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(17, 34, 52, 0.67);
+}
+.add-box{
+  width: 280rpx;
+  height: 64rpx;
+  
+  padding: 0rpx 18rpx;
+  gap: 6rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 2rpx rgba(17, 34, 52, 0.67);
+}
+.outline-btn {
+  width: 160rpx;
+  height: 64rpx;
+  padding: 10rpx 24rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 2rpx rgba(17, 34, 52, 0.67);
+  border: 1rpx solid rgba(255, 255, 255, 0.35);
+}
+
+.outline-btn text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: center;
+  color: rgba(17, 34, 52, 0.67);
+}
+
+.resource-swiper {
+  height: 280rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.resource-image-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-image {
+  width: 90%;
+  height: 220rpx;
+}
+.resource-sub{
+  display: block;
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: left;
+padding-left: 24rpx;
+  color: rgba(17, 34, 52, 0.67);
+}
+.add-service-btn {
+  margin: 0 0rpx 24rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  border: 1rpx dashed rgba(255, 255, 255, 0.25);
+  text-align: center;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: center;
+color: rgba(17, 34, 52, 0.67);
+  background: rgba(247, 241, 237, 0.74);
+}
+
+/* 7. Tab 区域 */
+.tab-section {
+  margin: 0 0rpx 24rpx;
+  overflow: hidden;
+  background: transparent;
+}
+
+.tab-bar {
+  display: flex;
+}
+
+.tab-item {
+  flex: 1;
+  position: relative;
+  padding: 24rpx 0;
+  text-align: center;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+  color: rgba(255, 255, 255, 1);
+}
+
+.tab-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tab-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,-12rpx);
+  width: 48rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background: rgba(147, 238, 238, 1);
+}
+
+.tab-panel {
+  padding: 24rpx 0rpx;
+}
+
+/* 活动 Tab */
+.activity-hero {
+  position: relative;
+  border-radius: 32rpx;
+  height: 5750rpx;
+  overflow: hidden;
+}
+
+.activity-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+}
+
+.activity-features {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24rpx;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 12rpx;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.feature-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.feature-icon-text {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+
+.feature-label {
+  font-size: 18rpx;
+  color: #ffffff;
+}
+
+/* 详细日程 Tab */
+.schedule-day {
+  margin-bottom: 32rpx;
+}
+
+.schedule-day-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.schedule-day-num {
+  width: 120rpx;
+  font-family: "Alimama ShuHeiTi", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 32rpx;    /* 16px × 2 = 32rpx */
+  line-height: 38rpx;  /* 19px × 2 = 38rpx */
+  letter-spacing: 0rpx;
+  text-align: center;
+
+  color: rgba(255, 255, 255, 1);
+}
+
+.schedule-day-title {
+  font-family: "Alimama ShuHeiTi", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 32rpx;    /* 16px × 2 = 32rpx */
+line-height: 38rpx;  /* 19px × 2 = 38rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+}
+
+.schedule-period {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.period-left {
+  width: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;   /* ⭐ 垂直居中关键 */
+  justify-content: center; /* ⭐ 整体居中（可选） */
+  gap: 14rpx;
+}
+
+.period-icon {
+  border-radius: 50%;
+  align-items: center;
+}
+
+.period-icon-ring {
+  width: 22rpx;
+  height: 22rpx;
+  border: 6rpx solid rgba(255, 197, 0, 1);
+  background: transparent;
+}
+
+.period-icon-dot {
+  width: 16rpx;
+  height: 16rpx;
+  background:rgba(255, 197, 0, 1);
+}
+
+.period-time {
+  font-family: "Alimama ShuHeiTi", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 32rpx;    /* 16px × 2 = 32rpx */
+  line-height: 38rpx;  /* 19px × 2 = 38rpx */
+  letter-spacing: 0rpx;
+  align-items: center;
+    color: rgba(255, 255, 255, 1);
+}
+
+.period-content {
+  flex: 1;
+}
+
+.period-item {
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 4rpx;
+}
+.period-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.schedule-transport {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding-left: 100rpx;
+}
+.transport-icon{
+  width: 30rpx;
+  height: 23rpx;
+  display: block;
+}
+.transport-text{
+  display: block;
+  transform: translateY(-8rpx);
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+  font-weight: 400; /* Regular */
+  font-size: 20rpx;    /* 10px × 2 = 20rpx */
+  line-height: 24rpx;  /* 12px × 2 = 24rpx */
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 4rpx;}
+/* 费用须知 Tab */
+.fee-section {
+  margin-bottom: 28rpx;
+}
+
+.fee-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.fee-section-title {
+  font-family: "Alimama ShuHeiTi", sans-serif;
+font-weight: 700; /* Bold */
+font-size: 32rpx;    /* 16px × 2 = 32rpx */
+line-height: 38rpx;  /* 19px × 2 = 38rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 1);
+}
+
+.fee-section-dot {
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+  border: 6rpx solid rgba(255, 197, 0, 1);
+  box-sizing: border-box;
+}
+
+.fee-section-item {
+  display: block;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 8rpx;
+}
+
+.safe-bottom {
+  height: 140rpx;
+}
+
+/* 底部操作栏 */
+
+.bottom-bar {
+  position: fixed;
+  left: 30rpx;
+  right: 30rpx;
+  bottom: 42rpx;
+
+  height: 120rpx;
+  z-index: 9999;
+
+  padding: 10rpx;
+  border-radius: 32rpx;
+
+  background: rgba(29, 45, 61, 0.12);
+  backdrop-filter: blur(40rpx);  /* 20px × 2 = 40rpx */
+
+/* 外阴影 + 内阴影 */
+box-shadow: 
+  0 4rpx 16rpx 0 rgba(0, 0, 0, 0.25),      /* Y:2px→4rpx, 模糊:8px→16rpx */
+  inset 0 2rpx 8rpx 4rpx rgba(255, 255, 255, 0.18);  
+  border: 2rpx solid rgba(255,255,255,1);
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.total-box {
+  width: 190rpx;
+  height: 100%;
+  padding-left: 18rpx;
+  border-radius: 24rpx;
+  background: rgba(18, 26, 39, 0.96);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.total-label{
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 24rpx;    /* 12px × 2 = 24rpx */
+line-height: 0;      /* 0px → 0，line-height 为 0 时可能影响文字显示，建议使用正常值 */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(147, 238, 238, 1);
+}
+.total-value {
+  font-family: "Noto Sans SC", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 28rpx;    /* 12px × 2 = 24rpx */
+line-height: 0;      /* 0px → 0，line-height 为 0 时可能影响文字显示，建议使用正常值 */
+letter-spacing: 0rpx;
+text-align: left;
+  color: rgba(147, 238, 238, 1);
+}
+
+.action-btn {
+  height: 100%;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.contact-btn {
+  width: 162rpx;
+  margin-left: 12rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-btn {
+  flex: 1;
+  margin-left: 12rpx;
+  gap: 8rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-free {
+  font-style: italic;
+  font-weight: 400; /* Regular */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 2rpx;   /* 1px × 2 = 2rpx */
+letter-spacing: 0rpx;
+text-align: center;
+color: rgba(0, 0, 0, 1);
+}
+
+.primary-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 2rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: center;
+color: rgba(0, 0, 0, 1);
+}
+
+.contact-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgba(9, 15, 24, 0.18);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 18rpx 18rpx;
+  box-sizing: border-box;
+}
+
+.contact-sheet {
+  width: 100%;
+  max-width: 574rpx;
+  min-height: 294rpx;
+  padding: 28rpx 20rpx 20rpx;
+  border-radius: 26rpx;
+  background:
+    linear-gradient(180deg, rgba(134, 143, 152, 0.34), rgba(110, 119, 128, 0.28)),
+    rgba(98, 108, 118, 0.22);
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow:
+    0 18rpx 42rpx rgba(8, 14, 22, 0.24),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.16);
+}
+
+.contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 54rpx;
+  margin-top: 8rpx;
+  margin-bottom: 34rpx;
+}
+
+.contact-icon-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.contact-icon-image {
+  display: block;
+}
+
+.contact-icon-wechat,
+.contact-icon-douyin {
+  width: 62rpx;
+  height: 62rpx;
+}
+
+.contact-icon-xiaohongshu {
+  width: 70rpx;
+  height: 44rpx;
+}
+
+.contact-phone {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.contact-phone-image {
+  width: 58rpx;
+  height: 58rpx;
+  display: block;
+}
+
+.contact-cancel {
+  width: 492rpx;
+  max-width: 100%;
+  height: 44rpx;
+  margin: 0 auto;
+  border-radius: 14rpx;
+  background: #8ceef0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111214;
+  font-size: 20rpx;
+  font-weight: 700;
+}

@@ -1,0 +1,109 @@
+<view class="detail-page">
+  <image class="page-bg" src="/images/bj-car.png" mode="aspectFill" />
+  <view class="page-blur"></view>
+  <view class="bg-mask"></view>
+ 
+
+  <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
+    <view class="top-bar">
+      <view class="back-btn" bindtap="onBack">
+<!-- 矢量箭头 -->
+        <view class="back-arrow"></view>
+      </view>
+    </view>
+    <view class="glass-card hero-card">
+      <view class="hero-image-wrap">
+        <image class="hero-image" src="{{service.image}}" mode="aspectFill" />
+              <view class="dou">
+                <image class="douyin" src="/images/douyin.png" mode="aspectFill" />
+              </view>
+        <view class="hero-dots">
+          <view class="hero-dot {{item === activeSlide ? 'active' : ''}}" wx:for="{{carouselDots}}" wx:key="*this"></view>
+        </view>
+      </view>
+
+      <view class="service-summary">
+        <view class="title-row">
+          <text class="service-name">{{service.name}}</text>
+          <image class="dropdown-icon" src="/images/sanjiao.png" mode="aspectFill" />
+        </view>
+        <text class="service-items">{{service.items}}</text>
+      </view>
+
+      <view class="booking-row">
+        <view class="quantity-box">
+          <text class="quantity-label">数量</text>
+          <view class="quantity-action {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">-</view>
+          <text class="quantity-value">{{quantity}}</text>
+          <view class="quantity-action" bindtap="onQuantityPlus">+</view>
+        </view>
+        <text class="price-text">¥{{service.price}}/包/日</text>
+      </view>
+
+      <view class="date-panel">
+        <view class="date-col">
+          <view class="date-main-row">
+            <text class="date-main">{{startDateText}}</text>
+            <image class="date-arrow" src="/images/sanjiao.png" mode="aspectFill" />
+          </view>
+          <text class="date-sub">{{startWeekday}} {{startTime}}</text>
+        </view>
+        <view class="date-center">共 5 日</view>
+        <view class="date-col date-col-right">
+          <view class="date-main-row">
+            <text class="date-main">{{endDateText}}</text>
+            <image class="date-arrow" src="/images/sanjiao.png" mode="aspectFill" />
+          </view>
+          <text class="date-sub">{{endWeekday}} {{endTime}}</text>
+        </view>
+      </view>
+
+      <view class="location-grid">
+        <view class="city-card">
+          <text class="location-label">城市</text>
+          <text class="location-value">{{city}}</text>
+        </view>
+        <view class="location-card-wide">
+          <text class="location-label">取包点</text>
+          <text class="location-value">{{pickupPoint}}</text>
+        </view>
+      </view>
+    </view>
+
+    <scroll-view scroll-x class="package-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="package-row">
+        <view class="package-card {{selectedPackage === item.id ? 'selected' : ''}}" wx:for="{{packageOptions}}" wx:key="id" bindtap="onSelectPackage" data-id="{{item.id}}">
+          <view class="package-head">
+            <text class="package-name">{{item.name}}</text>
+            <text class="package-price">{{item.priceLabel}}</text>
+          </view>
+          <text class="package-items">{{item.items}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="notice-section">
+      <view class="notice-head">
+        <text class="notice-title">使用须知</text>
+        <view class="notice-line"></view>
+      </view>
+      <view class="notice-panel"></view>
+    </view>
+
+    <view class="bottom-space"></view>
+  </scroll-view>
+
+  <view class="bottom-bar">
+    <view class="total-box">
+      <text class="total-label">总价：</text>
+      <text class="total-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="action-btn contact-btn" bindtap="onContactUs">联系我们</view>
+    <view class="action-btn primary-btn" bindtap="onGeneratePlan">
+      <text class="primary-free">free</text>
+      <text class="primary-text">生成计划</text>
+    </view>
+  </view>
+
+  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
+</view>

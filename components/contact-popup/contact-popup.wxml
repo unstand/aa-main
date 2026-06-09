@@ -1,0 +1,19 @@
+<view class="contact-mask" wx:if="{{visible}}" bindtap="onClose">
+  <view class="contact-sheet" catchtap="noop">
+    <view class="contact-icons">
+      <view class="contact-icon-item" bindtap="onWechatContact">
+        <image class="contact-icon-image contact-icon-wechat" src="/images/contact-wechat.png" mode="aspectFit" />
+      </view>
+      <view class="contact-icon-item" bindtap="onXiaohongshuContact">
+        <image class="contact-icon-image contact-icon-xiaohongshu" src="/images/contact-xiaohongshu.png" mode="aspectFit" />
+      </view>
+      <view class="contact-icon-item" bindtap="onDouyinContact">
+        <image class="contact-icon-image contact-icon-douyin" src="/images/contact-douyin.png" mode="aspectFit" />
+      </view>
+    </view>
+    <view class="contact-phone" bindtap="onCallPhone">
+      <image class="contact-phone-image" src="/images/contact-phone.png" mode="aspectFit" />
+    </view>
+    <view class="contact-cancel" bindtap="onClose">取消</view>
+  </view>
+</view>
