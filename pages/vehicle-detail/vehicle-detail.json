@@ -1,3 +1,6 @@
 {
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "contact-popup": "/components/contact-popup/contact-popup"
+  }
 }

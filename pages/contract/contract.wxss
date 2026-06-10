@@ -1,206 +1,321 @@
 /* pages/contract/contract.wxss */
+.text{
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: left;
+color: rgba(255, 255, 255, 1);
+}
 .contract-page {
   min-height: 100vh;
-  background-color: #1a1a2e;
+  background: linear-gradient(180deg, #13283a 0%, #0a1724 100%);
 }
 
 .content-scroll {
   height: calc(100vh - 120rpx);
-  padding: 20rpx 40rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
 
-/* ===== 合同标题 ===== */
+.top-bar {
+  position: relative;
+  display: flex;
+  padding-top: calc(100rpx + env(safe-area-inset-top));
+  padding-bottom: 24rpx;
+  z-index: 10;
+}
+
+.back-btn {
+  position: relative;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 16rpx;
+  z-index: 2;
+  background-color: rgba(17, 34, 52, 0.67);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow {
+  width: 20rpx;
+  height: 20rpx;
+  border-left: 4rpx solid rgba(203, 202, 202, 1);
+  border-bottom: 4rpx solid rgba(203, 202, 202, 1);
+  transform: rotate(45deg);
+  margin-left: 8rpx;
+}
+
+.paper-shell {
+  padding-bottom: 24rpx;
+}
+
+.paper-card {
+  background: transparent;
+  padding: 44rpx 34rpx 40rpx;
+}
+
 .contract-header {
-  text-align: center;
-  padding: 24rpx 0 36rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32rpx;
 }
 
 .contract-title {
   font-size: 40rpx;
-  color: #ffffff;
+  line-height: 56rpx;
+  color: #2b2116;
   font-weight: 700;
-  letter-spacing: 6rpx;
-  display: block;
-  margin-bottom: 20rpx;
-  font-family: "HarmonyOS Sans";
+  letter-spacing: 4rpx;
 }
 
-.contract-no {
+.contract-no-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8rpx;
+  margin-top: 18rpx;
 }
 
-.no-label {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.no-line {
-  width: 200rpx;
-  height: 1rpx;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* ===== 区块 ===== */
-.section {
-  background-color: rgba(45, 45, 68, 0.7);
-  border-radius: 20rpx;
-  padding: 24rpx;
-  margin-bottom: 16rpx;
-}
-
-.section-label {
-  font-size: 26rpx;
-  color: #4ecdc4;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 16rpx;
-  font-family: "HarmonyOS Sans";
-}
-
-.section-subtitle {
-  font-size: 26rpx;
-  color: #4ecdc4;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 16rpx;
-  font-family: "HarmonyOS Sans";
-}
-
-/* ===== 表单 ===== */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 14rpx;
-}
-
-.form-row {
-  display: flex;
-  align-items: center;
-  gap: 8rpx;
-}
-
-.form-label {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.5);
-  white-space: nowrap;
-  min-width: 140rpx;
-}
-
-.form-line {
-  flex: 1;
-  border-bottom: 1rpx solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 6rpx;
-}
-
-.form-input {
+.contract-no-label,
+.info-label,
+.static-label,
+.paragraph-text,
+.agreement-text {
   font-size: 24rpx;
-  color: #ffffff;
+  line-height: 40rpx;
+  color: #4c4034;
+}
+
+.section {
+  margin-bottom: 26rpx;
+}
+
+.intro-section {
+  border-top: 1rpx solid rgba(93, 73, 52, 0.18);
+  padding-top: 22rpx;
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #2f2418;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-title-line {
+  flex: 1;
+  height: 1rpx;
+  background: rgba(93, 73, 52, 0.2);
+  margin-left: 16rpx;
+}
+
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx 0;
+}
+
+.info-item {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.info-item.full {
   width: 100%;
 }
 
-.info-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8rpx;
+.info-label {
+  width: 140rpx;
+  flex-shrink: 0;
 }
 
-.info-value {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.8);
+.underline-field {
   flex: 1;
-}
-
-/* ===== 合同正文 ===== */
-.contract-text {
-  display: flex;
-  flex-direction: column;
-  gap: 10rpx;
-}
-
-.contract-text text {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.7;
-}
-
-.sub-heading {
-  color: rgba(255, 217, 61, 0.85) !important;
-  font-weight: 500;
-  margin-top: 6rpx;
-}
-
-.fee-label {
-  color: rgba(255, 255, 255, 0.55) !important;
-  font-size: 20rpx !important;
-  margin-top: 4rpx;
-}
-
-.fee-content {
-  color: rgba(255, 255, 255, 0.5) !important;
-  font-size: 20rpx !important;
-  padding-left: 16rpx;
-}
-
-/* 行内下划线 */
-.inline-line {
-  display: inline-block;
-  width: 120rpx;
-  height: 1rpx;
-  background-color: rgba(255, 255, 255, 0.2);
-  vertical-align: middle;
-  margin: 0 4rpx;
-}
-
-.inline-line.short {
-  width: 80rpx;
-}
-
-.inline-line.mini {
-  width: 50rpx;
-}
-
-/* ===== 签字区域 ===== */
-.sign-area {
+  min-width: 0;
+  height: 44rpx;
+  border-bottom: 2rpx solid #7f6a52;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
+}
+
+.underline-field.inline {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.underline-field.inline + .paragraph-text {
+  margin-left: 6rpx;
+}
+
+.underline-no {
+  width: 220rpx;
+  flex: none;
+}
+
+.underline-input {
+  width: 100%;
+  height: 100%;
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 400; /* Regular */
+font-size: 20rpx;    /* 10px × 2 = 20rpx */
+line-height: 24rpx;  /* 12px × 2 = 24rpx */
+letter-spacing: 0rpx;
+text-align: center;
+  color: rgba(255, 255, 255, 1);
+}
+
+.underline-input.center {
+  text-align: center;
+}
+
+.static-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.static-info-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.static-label {
+  width: 196rpx;
+  flex-shrink: 0;
+}
+
+.static-value {
+  flex: 1;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #2f2418;
+}
+
+.contract-section {
+  border-top: 1rpx solid rgba(93, 73, 52, 0.18);
+  padding-top: 24rpx;
+}
+
+.clause-title {
+  display: block;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #2f2418;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.contract-paragraph,
+.contract-line-wrap,
+.signature-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 14rpx;
+}
+
+.date-group {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10rpx;
+}
+
+.date-group.compact {
+  flex: 1;
+  min-width: 0;
+}
+
+.paragraph-gap {
+  margin-left: 12rpx;
+}
+
+.year-field {
+  width: 96rpx;
+  flex: none;
+  margin: 0 6rpx;
+}
+
+.mini-field {
+  width: 56rpx;
+  flex: none;
+  margin: 0 6rpx;
+}
+
+.money-field {
+  width: 132rpx;
+  flex: none;
+  margin: 0 6rpx;
+}
+
+.flex-mini {
+  width: 80rpx;
+  flex: none;
+  margin: 0 6rpx;
+}
+
+.flex-wide {
+  min-width: 220rpx;
+  margin: 0 6rpx;
+}
+
+.place-field {
+  width: 220rpx;
+  flex: none;
+  margin: 0 6rpx;
+}
+
+.text-block,
+.bullet-block {
+  display: flex;
+  flex-direction: column;
   gap: 8rpx;
+  margin-bottom: 14rpx;
+}
+
+.strong {
+  color: #2f2418;
+  font-weight: 700;
+}
+
+.top-gap {
+  margin-top: 8rpx;
+}
+
+.final-section {
+  margin-bottom: 10rpx;
+}
+
+.signature-panel {
   margin-top: 20rpx;
 }
 
-.sign-label {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.55);
-  white-space: nowrap;
+.signature-label {
+  width: 108rpx;
+  flex-shrink: 0;
 }
 
-.sign-line {
-  flex: 1;
-  height: 1rpx;
-  background-color: rgba(255, 255, 255, 0.15);
+.signature-field {
+  min-width: 260rpx;
 }
 
-.sign-line.short {
-  width: 80rpx;
-  flex: none;
+.signature-date-row {
+  margin-top: 8rpx;
 }
 
-.sign-line.mini {
-  width: 50rpx;
-  flex: none;
-}
-
-.sign-text {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* ===== 协议确认 ===== */
 .agreement-section {
-  margin: 20rpx 0;
-  padding: 16rpx 0;
+  padding: 24rpx 8rpx 8rpx;
 }
 
 .agreement-row {
@@ -210,96 +325,117 @@
 }
 
 .checkbox {
-  width: 36rpx;
-  height: 36rpx;
-  border: 2rpx solid rgba(255, 255, 255, 0.25);
-  border-radius: 6rpx;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid rgba(251, 247, 239, 0.72);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.3s;
 }
 
 .checkbox.checked {
-  background-color: #4ecdc4;
-  border-color: #4ecdc4;
+  background: #8ceef0;
+  border-color: #8ceef0;
 }
 
 .checkbox-icon {
+  color: #0e1b28;
   font-size: 22rpx;
-  color: #ffffff;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .agreement-text {
-  font-size: 22rpx;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(251, 247, 239, 0.88);
 }
 
 .safe-bottom {
-  height: 140rpx;
+  height: 160rpx;
 }
 
-/* ===== 底部操作栏 ===== */
 .bottom-bar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  left: 30rpx;
+  right: 30rpx;
+  bottom: 42rpx;
+  height: 120rpx;
+  z-index: 9999;
+  padding: 10rpx;
+  border-radius: 32rpx;
+  background: rgba(29, 45, 61, 0.12);
+  backdrop-filter: blur(40rpx);
+  box-shadow:
+    0 4rpx 16rpx 0 rgba(0, 0, 0, 0.25),
+    inset 0 2rpx 8rpx 4rpx rgba(255, 255, 255, 0.18);
+  border: 2rpx solid rgba(255, 255, 255, 1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 24rpx 40rpx;
-  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
-  background-color: rgba(30, 30, 50, 0.95);
-  backdrop-filter: blur(12px);
-  z-index: 100;
+  box-sizing: border-box;
+  -webkit-backdrop-filter: blur(18px);
 }
 
-.bar-price {
+.total-box {
+  width: 190rpx;
+  height: 100%;
+  padding-left: 18rpx;
+  border-radius: 24rpx;
+  background: rgba(18, 26, 39, 0.96);
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-.bar-price-label {
+.total-label {
+  font-family: "Noto Sans SC", sans-serif;
+  font-weight: 400;
   font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.5);
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(147, 238, 238, 1);
 }
 
-.bar-price-value {
-  font-size: 38rpx;
-  color: #ffffff;
-  font-weight: 700;
-  font-family: "HarmonyOS Sans";
+.total-value {
+  font-family: "Noto Sans SC", sans-serif;
+  font-weight: 400;
+  font-size: 28rpx;
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  text-align: left;
+  color: rgba(147, 238, 238, 1);
 }
 
-.bar-actions {
-  display: flex;
-  gap: 16rpx;
-}
-
-.bar-btn {
-  padding: 16rpx 36rpx;
-  border-radius: 28rpx;
+.action-btn {
+  height: 100%;
+  border-radius: 24rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
 }
 
-.bar-btn text {
-  font-size: 26rpx;
-  color: #ffffff;
-  white-space: nowrap;
+.contact-btn {
+  width: 162rpx;
+  margin-left: 12rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-btn {
+  flex: 1;
+  margin-left: 12rpx;
+  background: #8ceef0;
+  color: #111214;
+}
+
+.primary-text {
+  font-family: "Alimama FangYuanTi VF", sans-serif;
   font-weight: 500;
-  font-family: "HarmonyOS Sans";
-}
-
-.bar-btn-contact {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1rpx solid rgba(255, 255, 255, 0.2);
-}
-
-.bar-btn-action {
-  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  font-size: 28rpx;
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
 }

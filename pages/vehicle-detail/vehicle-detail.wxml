@@ -132,7 +132,7 @@
     <view class="bottom-space"></view>
   </scroll-view>
 
-  <view class="bottom-bar">
+  <view wx:if="{{!showContactPopup}}" class="bottom-bar">
     <view class="total-box">
       <text class="total-label">总价：</text>
       <text class="total-value">¥{{totalPrice}}</text>
@@ -144,5 +144,5 @@
     </view>
   </view>
 
-  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
+  <contact-popup visible="{{showContactPopup}}" bindclose="onCloseContactPopup"></contact-popup>
 </view>

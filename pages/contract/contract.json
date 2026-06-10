@@ -1,5 +1,6 @@
 {
-  "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#1a1a2e",
-  "navigationBarTitleText": "合同签订"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "contact-popup": "/components/contact-popup/contact-popup"
+  }
 }

@@ -14,7 +14,6 @@
     </view>
   </view>
 
-  <block wx:else>
     <scroll-view scroll-y class="content-scroll" scroll-into-view="{{scrollIntoView}}">
       <view class="top-bar">
         <view class="back-btn" bindtap="onBack">
@@ -265,7 +264,7 @@
     </scroll-view>
 
     <!-- 底部操作栏 -->
-    <view class="bottom-bar">
+    <view wx:if="{{!showContactPopup}}" class="bottom-bar">
     <view class="total-box">
       <text class="total-label">总价：</text>
       <text class="total-value">¥{{totalPrice}}</text>
@@ -277,6 +276,5 @@
     </view>
   </view>
 
-  <contact-popup visible="{{showContactPopup}}" bind:close="onCloseContactPopup"></contact-popup>
-  </block>
+  <contact-popup visible="{{showContactPopup}}" bindclose="onCloseContactPopup"></contact-popup>
 </view>

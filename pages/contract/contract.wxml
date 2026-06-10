@@ -1,201 +1,318 @@
 <!--pages/contract/contract.wxml-->
 <view class="contract-page">
   <scroll-view scroll-y class="content-scroll" enhanced show-scrollbar="{{false}}">
-    <!-- 合同标题 -->
-    <view class="contract-header">
-      <text class="contract-title">国内旅游服务合同</text>
-      <view class="contract-no">
-        <text class="no-label">合同编号：</text>
-        <view class="no-line"></view>
+    <view class="top-bar">
+      <view class="back-btn" bindtap="onBack">
+        <view class="back-arrow"></view>
       </view>
     </view>
 
-    <!-- 甲方信息 -->
-    <view class="section">
-      <text class="section-label">甲方（旅游者）：</text>
-      <view class="form-group">
-        <view class="form-row">
-          <text class="form-label">姓名：</text>
-          <view class="form-line">
-            <input class="form-input" placeholder="" bindinput="onInputTravelerName" value="{{travelerName}}" />
+    <view class="paper-shell">
+      <view class="paper-card">
+        <view class="contract-header">
+          <text class="text">国内旅游服务合同</text>
+          <view class="contract-no-row">
+            <text class="text">合同编号：</text>
+            <view class="underline-field underline-no">
+              <input class="underline-input" value="{{contractNo}}" bindinput="onInputContractNo" />
+            </view>
           </view>
         </view>
-        <view class="form-row">
-          <text class="form-label">身份证号：</text>
-          <view class="form-line">
-            <input class="form-input" placeholder="" bindinput="onInputIdCard" value="{{travelerIdCard}}" />
+
+        <view class="section intro-section">
+          <view class="section-title-row">
+            <text class="text">甲方（旅游者）</text>
+            <view class="section-title-line"></view>
+          </view>
+          <view class="info-grid">
+            <view class="info-item full">
+              <text class="text">姓名</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerName}}" bindinput="onInputTravelerName" />
+              </view>
+            </view>
+            <view class="info-item full">
+              <text class="text">身份证号</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerIdCard}}" bindinput="onInputIdCard" />
+              </view>
+            </view>
+            <view class="info-item full">
+              <text class="text">联系电话</text>
+              <view class="underline-field">
+                <input class="underline-input" type="number" value="{{travelerPhone}}" bindinput="onInputPhone" />
+              </view>
+            </view>
+            <view class="info-item full">
+              <text class="text">住址</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
           </view>
         </view>
-        <view class="form-row">
-          <text class="form-label">联系电话：</text>
-          <view class="form-line">
-            <input class="form-input" type="number" placeholder="" bindinput="onInputPhone" value="{{travelerPhone}}" />
+
+        <view class="section intro-section">
+          <view class="section-title-row">
+            <text class="text">乙方（旅行社）</text>
+            <view class="section-title-line"></view>
+          </view>
+          <view class="static-info-list">
+            <view class="static-info-row">
+              <text class="text">公司名称</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
+            <view class="static-info-row">
+              <text class="text">统一社会信用代码</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
+            <view class="static-info-row">
+              <text class="text">经营地址</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
+            <view class="static-info-row">
+              <text class="text">联系电话</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
+            <view class="static-info-row">
+              <text class="text">经营范围</text>
+              <view class="underline-field">
+                <input class="underline-input" value="{{travelerAddress}}" bindinput="onInputAddress" />
+              </view>
+            </view>
           </view>
         </view>
-        <view class="form-row">
-          <text class="form-label">住址：</text>
-          <view class="form-line">
-            <input class="form-input" placeholder="" bindinput="onInputAddress" value="{{travelerAddress}}" />
+
+        <view class="section contract-section">
+          <text class="text">一、旅游行程信息</text>
+          <view class="contract-paragraph">
+            <text class="text">出行人：</text>
+            <view class="underline-field inline flex-mini">
+              <input class="underline-input center" type="number" value="{{travelerCount}}" bindinput="onInputCount" />
+            </view>
+            <text class="text">人</text>
+          </view>
+
+          <view class="contract-line-wrap">
+            <text class="text">出行时间：</text>
+            <view class="date-group">
+              <view class="underline-field inline year-field">
+                <input class="underline-input center" type="number" value="{{travelStartYear}}" bindinput="onInputTravelStartYear" />
+              </view>
+              <text class="text">年</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{travelStartMonth}}" bindinput="onInputTravelStartMonth" />
+              </view>
+              <text class="text">月</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{travelStartDay}}" bindinput="onInputTravelStartDay" />
+              </view>
+              <text class="text">日</text>
+              <text class="text">至</text>
+              <view class="underline-field inline year-field">
+                <input class="underline-input center" type="number" value="{{travelEndYear}}" bindinput="onInputTravelEndYear" />
+              </view>
+              <text class="text">年</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{travelEndMonth}}" bindinput="onInputTravelEndMonth" />
+              </view>
+              <text class="text">月</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{travelEndDay}}" bindinput="onInputTravelEndDay" />
+              </view>
+              <text class="text">日</text>
+            </view>
+          </view>
+
+          <view class="contract-line-wrap">
+            <text class="text">共计</text>
+            <view class="underline-field inline mini-field">
+              <input class="underline-input center" type="number" value="{{travelDays}}" bindinput="onInputTravelDays" />
+            </view>
+            <text class="text">天</text>
+            <view class="underline-field inline mini-field">
+              <input class="underline-input center" type="number" value="{{travelNights}}" bindinput="onInputTravelNights" />
+            </view>
+            <text class="text">晚</text>
+          </view>
+
+          <view class="contract-line-wrap">
+            <text class="text">出行线路：</text>
+            <view class="underline-field inline flex-wide">
+              <input class="underline-input" value="{{travelRoute}}" bindinput="onInputRoute" />
+            </view>
+          </view>
+
+          <view class="contract-line-wrap">
+            <text class="text">集合地点：</text>
+            <view class="underline-field inline place-field">
+              <input class="underline-input" value="{{gatherPlace}}" bindinput="onInputGatherPlace" />
+            </view>
+            <text class="text paragraph-gap">集合时间：</text>
+            <view class="date-group compact">
+              <view class="underline-field inline year-field">
+                <input class="underline-input center" type="number" value="{{gatherYear}}" bindinput="onInputGatherYear" />
+              </view>
+              <text class="text">年</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{gatherMonth}}" bindinput="onInputGatherMonth" />
+              </view>
+              <text class="text">月</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{gatherDay}}" bindinput="onInputGatherDay" />
+              </view>
+              <text class="text">日</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{gatherHour}}" bindinput="onInputGatherHour" />
+              </view>
+              <text class="text">点</text>
+            </view>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="clause-title">二、费用标准及支付</text>
+          <view class="contract-line-wrap">
+            <text class="text">旅游总费用：人民币</text>
+            <view class="underline-field inline money-field">
+              <input class="underline-input center" type="digit" value="{{totalFee}}" bindinput="onInputTotalFee" />
+            </view>
+            <text class="text">元（大写：</text>
+            <view class="underline-field inline flex-wide">
+              <input class="underline-input" value="{{totalFeeUpper}}" bindinput="onInputTotalFeeUpper" />
+            </view>
+            <text class="text">）</text>
+          </view>
+          <view class="text-block">
+            <text class="text">费用包含：</text>
+            <text class=text">{{feeIncludes}}</text>
+          </view>
+          <view class="text-block">
+            <text class="text">费用不含：</text>
+            <text class="text">{{feeExcludes}}</text>
+          </view>
+          <view class="contract-line-wrap">
+            <text class="text">付款方式：{{paymentMethod}}，付款账户：</text>
+            <view class="underline-field inline flex-wide">
+              <input class="underline-input" value="{{paymentAccount}}" bindinput="onInputAccount" />
+            </view>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="text">三、双方权利义务</text>
+          <view class="bullet-block">
+            <text class="text">甲方：</text>
+            <text class="text">1. 提供真实有效身份信息，按时集合出行，遵守行程安排；</text>
+            <text class="text">2. 妥善保管财物，注意人身安全，遵守景区规章制度；</text>
+            <text class="text">3. 因个人原因中途离团、放弃项目，费用不予退还。</text>
+            <text class="text">乙方：</text>
+            <text class="text">1. 按约定行程、住宿、餐饮标准提供服务，不得擅自变更核心行程；</text>
+            <text class="text">2. 委派持证导游全程陪同，保障出行基本人身安全；</text>
+            <text class="text">3. 不得强制购物、强制推销自费项目。</text>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="text">四、行程变更与退改规则</text>
+          <view class="bullet-block">
+            <text class="text">乙方因不可抗力调整行程，优先调换等价景点，差价多退少补。</text>
+            <text class="text">甲方临时退团：</text>
+            <text class="text">• 出发前3天及以上退费100%；</text>
+            <text class="text">• 出发前1–2天退费70%；</text>
+            <text class="text">• 出发当日退团仅退还未产生门票住宿费用；</text>
+            <text class="text">• 地震、台风、交通停运等不可抗力，双方互不追责，据实结算退费。</text>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="text">五、安全责任</text>
+          <view class="bullet-block">
+            <text class="text">甲方：</text>
+            <text class="text">自身疾病、违规游玩、私自脱团引发意外，自行承担责任。</text>
+            <text class="text">乙方：</text>
+            <text class="text">统一购买旅游意外险，出险按保险公司理赔标准执行；游玩期间遵守安全提示，高危项目自愿参与，风险自负。</text>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="text">六、违约责任</text>
+          <view class="bullet-block">
+            <text class="text">1. 乙方擅自减少景点、降低食宿标准，按对应金额赔付差价；</text>
+            <text class="text">2. 强制购物违规，甲方可要求退还消费款项；</text>
+            <text class="text">3. 任何一方无故违约，赔偿对方实际经济损失。</text>
+          </view>
+        </view>
+
+        <view class="section contract-section">
+          <text class="text">七、争议解决</text>
+          <view class="bullet-block">
+            <text class="text">合同履行产生纠纷，双方协商处理；协商不成，向合同签订地人民法院提起诉讼。</text>
+          </view>
+        </view>
+
+        <view class="section contract-section final-section">
+          <text class=text">八、其他约定</text>
+          <view class="bullet-block">
+            <text class="text">本合同一式两份，甲乙双方各执一份，签字盖章后生效。</text>
+          </view>
+          <view class="signature-panel">
+            <view class="signature-row">
+              <text class="text">甲方签字：</text>
+              <view class="underline-field signature-field">
+                <input class="underline-input" value="{{signName}}" bindinput="onInputSignName" />
+              </view>
+            </view>
+            <view class="signature-row signature-date-row">
+              <text class="text">日期：</text>
+              <view class="underline-field inline year-field">
+                <input class="underline-input center" type="number" value="{{signYear}}" bindinput="onInputSignYear" />
+              </view>
+              <text class="text">年</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{signMonth}}" bindinput="onInputSignMonth" />
+              </view>
+              <text class="text">月</text>
+              <view class="underline-field inline mini-field">
+                <input class="underline-input center" type="number" value="{{signDay}}" bindinput="onInputSignDay" />
+              </view>
+              <text class="text">日</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
 
-    <!-- 乙方信息 -->
-    <view class="section">
-      <text class="section-label">乙方（旅行社）：</text>
-      <view class="form-group">
-        <view class="info-row">
-          <text class="form-label">公司名称：</text>
-          <text class="info-value">{{companyName}}</text>
+      <view class="agreement-section">
+        <view class="agreement-row" bindtap="onAgreeChange">
+          <view class="checkbox {{agreed ? 'checked' : ''}}">
+            <text class="checkbox-icon" wx:if="{{agreed}}">✓</text>
+          </view>
+          <text class="text">本人已阅读并同意以上合同条款</text>
         </view>
-        <view class="info-row">
-          <text class="form-label">统一社会信用代码：</text>
-          <text class="info-value">{{companyCreditCode}}</text>
-        </view>
-        <view class="info-row">
-          <text class="form-label">经营地址：</text>
-          <text class="info-value">{{companyAddress}}</text>
-        </view>
-        <view class="info-row">
-          <text class="form-label">联系电话：</text>
-          <text class="info-value">{{companyPhone}}</text>
-        </view>
-        <view class="info-row">
-          <text class="form-label">经营范围：</text>
-          <text class="info-value">{{companyScope}}</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- 一、旅游行程信息 -->
-    <view class="section">
-      <text class="section-subtitle">一、旅游行程信息</text>
-      <view class="contract-text">
-        <text>出行人：<view class="inline-line"></view> 人</text>
-        <text>出行时间：<view class="inline-line short"></view> 年 <view class="inline-line mini"></view> 月 <view class="inline-line mini"></view> 日 至 <view class="inline-line short"></view> 年 <view class="inline-line mini"></view> 月 <view class="inline-line mini"></view> 日，共计 <view class="inline-line mini"></view> 天 <view class="inline-line mini"></view> 晚</text>
-        <text>出行线路：<view class="inline-line"></view></text>
-        <text>集合地点：<view class="inline-line"></view>；集合时间：<view class="inline-line short"></view> 年 <view class="inline-line mini"></view> 月 <view class="inline-line mini"></view> 日 <view class="inline-line mini"></view> 点</text>
-      </view>
-    </view>
-
-    <!-- 二、费用标准及支付 -->
-    <view class="section">
-      <text class="section-subtitle">二、费用标准及支付</text>
-      <view class="contract-text">
-        <text>旅游总费用：人民币 <view class="inline-line short"></view> 元（大写：<view class="inline-line"></view>）</text>
-        <text class="fee-label">费用包含：</text>
-        <text class="fee-content">交通费、住宿费、景区首道门票、正餐餐费、导游服务费、当地用车。</text>
-        <text class="fee-label">费用不含：</text>
-        <text class="fee-content">个人消费、自费项目、往返出发地交通、单人房差、意外伤病医疗费用。</text>
-        <text>付款方式：签约当日一次性付清，付款账户：<view class="inline-line"></view></text>
-      </view>
-    </view>
-
-    <!-- 三、双方权利义务 -->
-    <view class="section">
-      <text class="section-subtitle">三、双方权利义务</text>
-      <view class="contract-text">
-        <text class="sub-heading">甲方：</text>
-        <text>1. 提供真实有效身份信息，按时集合出行，遵守行程安排；</text>
-        <text>2. 妥善保管财物，注意人身安全，遵守景区规章制度；</text>
-        <text>3. 因个人原因中途离团、放弃项目，费用不予退还。</text>
-        <text class="sub-heading">乙方：</text>
-        <text>1. 按约定行程、住宿、餐饮标准提供服务，不得擅自变更核心行程；</text>
-        <text>2. 委派持证导游全程陪同，保障出行基本人身安全；</text>
-        <text>3. 不得强制购物、强制推销自费项目。</text>
-      </view>
-    </view>
-
-    <!-- 四、行程变更与退改规则 -->
-    <view class="section">
-      <text class="section-subtitle">四、行程变更与退改规则</text>
-      <view class="contract-text">
-        <text>乙方因不可抗力调整行程，优先调换等价景点，差价多退少补。</text>
-        <text class="sub-heading">甲方临时退团：</text>
-        <text>• 出发前3天及以上退费100%；</text>
-        <text>• 出发前1–2天退费70%；</text>
-        <text>• 出发当日退团仅退还未产生门票住宿费用；</text>
-        <text>• 地震、台风、交通停运等不可抗力，双方互不追责，据实结算退费。</text>
-      </view>
-    </view>
-
-    <!-- 五、安全责任 -->
-    <view class="section">
-      <text class="section-subtitle">五、安全责任</text>
-      <view class="contract-text">
-        <text class="sub-heading">甲方：</text>
-        <text>自身疾病、违规游玩、私自脱团引发意外，自行承担责任。</text>
-        <text class="sub-heading">乙方：</text>
-        <text>统一购买旅游意外险，出险按保险公司理赔标准执行；游玩期间遵守安全提示，高危项目自愿参与，风险自负。</text>
-      </view>
-    </view>
-
-    <!-- 六、违约责任 -->
-    <view class="section">
-      <text class="section-subtitle">六、违约责任</text>
-      <view class="contract-text">
-        <text>1. 乙方擅自减少景点、降低食宿标准，按对应金额赔付差价；</text>
-        <text>2. 强制购物违规，甲方可要求退还消费款项；</text>
-        <text>3. 任何一方无故违约，赔偿对方实际经济损失。</text>
-      </view>
-    </view>
-
-    <!-- 七、争议解决 -->
-    <view class="section">
-      <text class="section-subtitle">七、争议解决</text>
-      <view class="contract-text">
-        <text>合同履行产生纠纷，双方协商处理；协商不成，向合同签订地人民法院提起诉讼。</text>
-      </view>
-    </view>
-
-    <!-- 八、其他约定 -->
-    <view class="section">
-      <text class="section-subtitle">八、其他约定</text>
-      <view class="contract-text">
-        <text>本合同一式两份，甲乙双方各执一份，签字盖章后生效。</text>
-        <view class="sign-area">
-          <text class="sign-label">甲方签字：</text>
-          <view class="sign-line"></view>
-        </view>
-        <view class="sign-area">
-          <text class="sign-label">日期：</text>
-          <view class="sign-line short"></view>
-          <text class="sign-text">年</text>
-          <view class="sign-line mini"></view>
-          <text class="sign-text">月</text>
-          <view class="sign-line mini"></view>
-          <text class="sign-text">日</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- 协议确认 -->
-    <view class="agreement-section">
-      <view class="agreement-row" bindtap="onAgreeChange">
-        <view class="checkbox {{agreed ? 'checked' : ''}}">
-          <text class="checkbox-icon" wx:if="{{agreed}}">✓</text>
-        </view>
-        <text class="agreement-text">本人已阅读并同意以上合同条款</text>
       </view>
     </view>
 
     <view class="safe-bottom"></view>
   </scroll-view>
 
-  <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <view class="bar-price">
-      <text class="bar-price-label">总价：</text>
-      <text class="bar-price-value">¥{{totalFee}}</text>
+  <view wx:if="{{!showContactPopup}}" class="bottom-bar">
+    <view class="total-box">
+      <text class="total-label">总价：</text>
+      <text class="total-value">¥{{totalFee}}</text>
     </view>
-    <view class="bar-actions">
-      <view class="bar-btn bar-btn-contact" bindtap="onContactUs">
-        <text>联系我们</text>
-      </view>
-      <view class="bar-btn bar-btn-action" bindtap="onSignAndPay">
-        <text>签名及付费</text>
-      </view>
+    <view class="action-btn contact-btn" bindtap="onContactUs">联系我们</view>
+    <view class="action-btn primary-btn" bindtap="onSignAndPay">
+      <text class="primary-text">签字及付费</text>
     </view>
   </view>
+
+  <contact-popup visible="{{showContactPopup}}" bindclose="onCloseContactPopup"></contact-popup>
 </view>

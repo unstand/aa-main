@@ -11,9 +11,10 @@
 }
 
 .contact-sheet {
-  width: 100%;
-  max-width: 574rpx;
-  min-height: 294rpx;
+  position: absolute;
+  bottom: 56rpx;
+  width: 660rpx;
+  min-height: 600rpx;
   padding: 28rpx 20rpx 20rpx;
   border-radius: 26rpx;
   background:
@@ -31,8 +32,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 54rpx;
-  margin-top: 8rpx;
+  gap: 100rpx;
+  margin-top: 40rpx;
   margin-bottom: 34rpx;
 }
 
@@ -40,8 +41,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 84rpx;
-  height: 84rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
 
 .contact-icon-image {
@@ -50,38 +51,47 @@
 
 .contact-icon-wechat,
 .contact-icon-douyin {
-  width: 62rpx;
-  height: 62rpx;
+  width: 100%;
+  height: 100%;
 }
 
 .contact-icon-xiaohongshu {
-  width: 70rpx;
-  height: 44rpx;
+  width: 100%;
+  height: 100%;
 }
 
 .contact-phone {
   display: flex;
+  width: 120rpx;
+  height: 120rpx;
   justify-content: center;
-  margin-bottom: 30rpx;
+  margin: 48rpx 56rpx;
 }
 
 .contact-phone-image {
-  width: 58rpx;
-  height: 58rpx;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
 .contact-cancel {
-  width: 492rpx;
+  position: absolute;
+  bottom: 40rpx;              /* 距离底部间距 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560rpx;
   max-width: 100%;
-  height: 44rpx;
-  margin: 0 auto;
-  border-radius: 14rpx;
-  background: #8ceef0;
+  height: 68rpx;
+  border-radius: 24rpx;
+  background: rgba(147, 238, 238, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #111214;
-  font-size: 20rpx;
-  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+  font-family: "Alimama FangYuanTi VF", sans-serif;
+font-weight: 500; /* Medium */
+font-size: 28rpx;    /* 14px × 2 = 28rpx */
+line-height: 34rpx;  /* 17px × 2 = 34rpx */
+letter-spacing: 0rpx;
+text-align: center;
 }

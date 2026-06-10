@@ -1,121 +1,262 @@
 // pages/contract/contract.js
 const app = getApp()
 
+const STORAGE_KEY = 'contractFormDraft'
+
+const DEFAULT_DATA = {
+  contractNo: '',
+  travelerName: '',
+  travelerIdCard: '',
+  travelerPhone: '',
+  travelerAddress: '',
+  companyShortName: '探索旅行',
+  companyName: '探索旅行国际旅行社有限公司',
+  companyCreditCode: '91650100MA7XXXXX',
+  companyAddress: '新疆喀什市解放北路XX号',
+  companyPhone: '4001234567',
+  companyScope: '国内旅游业务',
+  travelerCount: '',
+  travelStartYear: '2025',
+  travelStartMonth: '8',
+  travelStartDay: '15',
+  travelEndYear: '2025',
+  travelEndMonth: '8',
+  travelEndDay: '20',
+  travelDays: '5',
+  travelNights: '4',
+  travelRoute: '',
+  gatherPlace: '',
+  gatherYear: '2025',
+  gatherMonth: '8',
+  gatherDay: '15',
+  gatherHour: '10',
+  totalFee: '1750',
+  totalFeeUpper: '壹仟柒佰伍拾',
+  feeIncludes: '交通费、住宿费、景区首道门票、正餐餐费、导游服务费、当地用车。',
+  feeExcludes: '个人消费、自费项目、往返出发地交通、单人房差、意外伤病医疗费用。',
+  paymentMethod: '签约当日一次性付清',
+  paymentAccount: '',
+  signName: '',
+  signYear: '2025',
+  signMonth: '8',
+  signDay: '15',
+  agreed: false,
+  showContactPopup: false
+}
+
 Page({
   data: {
-    // 甲方（旅游者）信息
-    travelerName: '',
-    travelerIdCard: '',
-    travelerPhone: '',
-    travelerAddress: '',
-    // 乙方（旅行社）信息
-    companyShortName: '探索旅行',
-    companyName: '探索旅行国际旅行社有限公司',
-    companyCreditCode: '91650100MA7XXXXX',
-    companyAddress: '新疆喀什市解放北路XX号',
-    companyPhone: '4001234567',
-    companyScope: '国内旅游业务',
-    // 行程信息
-    travelerCount: '',
-    travelStartDate: '2025年8月15日',
-    travelEndDate: '2025年8月20日',
-    travelDays: '5',
-    travelNights: '4',
-    travelRoute: '',
-    gatherPlace: '',
-    gatherTime: '2025年8月15日10点',
-    // 费用信息
-    totalFee: 1750,
-    totalFeeUpper: '壹仟柒佰伍拾',
-    feeIncludes: '交通费、住宿费、景区首道门票、正餐餐费、导游服务费、当地用车。',
-    feeExcludes: '个人消费、自费项目、往返出发地交通、单人房差、意外伤病医疗费用。',
-    paymentMethod: '签约当日一次性付清',
-    paymentAccount: '',
-    // 甲方权利义务
-    partyARights: [
-      '提供真实有效身份信息',
-      '遵守景区规章制度',
-      '按照约定时间集合出行',
-      '自行承担个人消费费用',
-      '对行程安排提出合理建议',
-      '有权了解行程安全注意事项',
-      '尊重当地风俗习惯',
-      '爱护旅游环境'
-    ],
-    // 乙方权利义务
-    partyBRights: [
-      '安排预约行程，住宿，餐饮标准提供服务',
-      '提供合格的旅游车辆及驾驶员',
-      '为甲方购买旅游意外保险',
-      '保障甲方人身财产安全',
-      '及时处理甲方投诉',
-      '告知旅游安全注意事项'
-    ],
-    agreed: false
+    ...DEFAULT_DATA
   },
 
   onLoad(options) {
-    if (options.vehicleId) {
-      const vehicleId = parseInt(options.vehicleId)
-      const vehicle = app.globalData.vehicles.find(v => v.id === vehicleId)
-      if (vehicle) {
-        const days = parseInt(options.days) || 5
-        const quantity = parseInt(options.quantity) || 1
-        const insuranceId = options.insuranceId || 'basic'
-        const insurance = app.globalData.insurancePlans.find(p => p.id === insuranceId)
-        const total = vehicle.price * quantity * days + (insurance ? insurance.price * days : 0)
+    this.restoreDraft()
+    this.applyOrderInfo(options)
+  },
+
+  restoreDraft() {
+    try {
+      const draft = wx.getStorageSync(STORAGE_KEY)
+      if (draft && typeof draft === 'object') {
         this.setData({
-          totalFee: total,
-          travelRoute: vehicle.name + '自驾游'
+          ...draft,
+          showContactPopup: false
         })
       }
+    } catch (error) {
+      console.error('恢复合同草稿失败', error)
     }
   },
 
+  saveDraft(extraData = {}) {
+    try {
+      wx.setStorageSync(STORAGE_KEY, {
+        ...this.data,
+        ...extraData,
+        showContactPopup: false
+      })
+    } catch (error) {
+      console.error('保存合同草稿失败', error)
+    }
+  },
+
+  updateField(field, value) {
+    this.setData({ [field]: value })
+    this.saveDraft({ [field]: value })
+  },
+
+  applyOrderInfo(options = {}) {
+    if (!options.vehicleId) {
+      return
+    }
+
+    const vehicleId = parseInt(options.vehicleId, 10)
+    const vehicles = (app.globalData && app.globalData.vehicles) || []
+    const insurancePlans = (app.globalData && app.globalData.insurancePlans) || []
+    const vehicle = vehicles.find((item) => item.id === vehicleId)
+
+    if (!vehicle) {
+      return
+    }
+
+    const days = parseInt(options.days, 10) || parseInt(this.data.travelDays, 10) || 5
+    const quantity = parseInt(options.quantity, 10) || 1
+    const insuranceId = options.insuranceId || 'basic'
+    const insurance = insurancePlans.find((item) => item.id === insuranceId)
+    const total = vehicle.price * quantity * days + (insurance ? insurance.price * days : 0)
+
+    const nextData = {
+      totalFee: String(total),
+      travelRoute: `${vehicle.name}自驾游`,
+      travelerCount: String(quantity),
+      travelDays: String(days),
+      travelNights: String(Math.max(days - 1, 0))
+    }
+
+    this.setData(nextData)
+    this.saveDraft(nextData)
+  },
+
+  onBack() {
+    wx.navigateBack({
+      delta: 1,
+      fail: () => {
+        wx.switchTab({
+          url: '/pages/home/home'
+        })
+      }
+    })
+  },
+
+  onInputContractNo(e) {
+    this.updateField('contractNo', e.detail.value)
+  },
+
   onInputTravelerName(e) {
-    this.setData({ travelerName: e.detail.value })
+    this.updateField('travelerName', e.detail.value)
   },
 
   onInputIdCard(e) {
-    this.setData({ travelerIdCard: e.detail.value })
+    this.updateField('travelerIdCard', e.detail.value)
   },
 
   onInputPhone(e) {
-    this.setData({ travelerPhone: e.detail.value })
+    this.updateField('travelerPhone', e.detail.value)
   },
 
   onInputAddress(e) {
-    this.setData({ travelerAddress: e.detail.value })
+    this.updateField('travelerAddress', e.detail.value)
   },
 
   onInputCount(e) {
-    this.setData({ travelerCount: e.detail.value })
+    this.updateField('travelerCount', e.detail.value)
+  },
+
+  onInputTravelStartYear(e) {
+    this.updateField('travelStartYear', e.detail.value)
+  },
+
+  onInputTravelStartMonth(e) {
+    this.updateField('travelStartMonth', e.detail.value)
+  },
+
+  onInputTravelStartDay(e) {
+    this.updateField('travelStartDay', e.detail.value)
+  },
+
+  onInputTravelEndYear(e) {
+    this.updateField('travelEndYear', e.detail.value)
+  },
+
+  onInputTravelEndMonth(e) {
+    this.updateField('travelEndMonth', e.detail.value)
+  },
+
+  onInputTravelEndDay(e) {
+    this.updateField('travelEndDay', e.detail.value)
+  },
+
+  onInputTravelDays(e) {
+    this.updateField('travelDays', e.detail.value)
+  },
+
+  onInputTravelNights(e) {
+    this.updateField('travelNights', e.detail.value)
   },
 
   onInputRoute(e) {
-    this.setData({ travelRoute: e.detail.value })
+    this.updateField('travelRoute', e.detail.value)
   },
 
   onInputGatherPlace(e) {
-    this.setData({ gatherPlace: e.detail.value })
+    this.updateField('gatherPlace', e.detail.value)
+  },
+
+  onInputGatherYear(e) {
+    this.updateField('gatherYear', e.detail.value)
+  },
+
+  onInputGatherMonth(e) {
+    this.updateField('gatherMonth', e.detail.value)
+  },
+
+  onInputGatherDay(e) {
+    this.updateField('gatherDay', e.detail.value)
+  },
+
+  onInputGatherHour(e) {
+    this.updateField('gatherHour', e.detail.value)
+  },
+
+  onInputTotalFee(e) {
+    this.updateField('totalFee', e.detail.value)
+  },
+
+  onInputTotalFeeUpper(e) {
+    this.updateField('totalFeeUpper', e.detail.value)
   },
 
   onInputAccount(e) {
-    this.setData({ paymentAccount: e.detail.value })
+    this.updateField('paymentAccount', e.detail.value)
+  },
+
+  onInputSignName(e) {
+    this.updateField('signName', e.detail.value)
+  },
+
+  onInputSignYear(e) {
+    this.updateField('signYear', e.detail.value)
+  },
+
+  onInputSignMonth(e) {
+    this.updateField('signMonth', e.detail.value)
+  },
+
+  onInputSignDay(e) {
+    this.updateField('signDay', e.detail.value)
   },
 
   onAgreeChange() {
-    this.setData({ agreed: !this.data.agreed })
+    const agreed = !this.data.agreed
+    this.setData({ agreed })
+    this.saveDraft({ agreed })
   },
 
   onContactUs() {
-    wx.makePhoneCall({
-      phoneNumber: '4001234567'
+    this.setData({
+      showContactPopup: true
+    })
+  },
+
+  onCloseContactPopup() {
+    this.setData({
+      showContactPopup: false
     })
   },
 
   onSignAndPay() {
     const { travelerName, travelerIdCard, travelerPhone, agreed } = this.data
+
     if (!travelerName || !travelerIdCard || !travelerPhone) {
       wx.showToast({
         title: '请填写完整个人信息',
@@ -123,6 +264,7 @@ Page({
       })
       return
     }
+
     if (!agreed) {
       wx.showToast({
         title: '请先阅读并同意合同条款',

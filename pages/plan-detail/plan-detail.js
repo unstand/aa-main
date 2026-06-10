@@ -475,8 +475,13 @@ Page({
   },
 
   onContactUs() {
-    wx.makePhoneCall({
-      phoneNumber: '4001234567'
+    this.setData({
+      showContactPopup: true
+    })
+  },
+  onCloseContactPopup() {
+    this.setData({
+      showContactPopup: false
     })
   },
 
@@ -485,4 +490,5 @@ Page({
       url: `/pages/contract/contract?planId=${this.data.planId}`
     })
   }
-})
+},
+)
